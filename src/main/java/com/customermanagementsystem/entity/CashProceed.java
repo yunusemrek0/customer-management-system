@@ -12,6 +12,8 @@ public class CashProceed {
 
     private LocalDateTime dateTime;
 
+    private Double total;
+
     private String description;
 
 
