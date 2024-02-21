@@ -1,6 +1,7 @@
 package com.customermanagementsystem.entity.customer;
 
-import com.customermanagementsystem.entity.dealer.Product;
+import com.customermanagementsystem.entity.dailysale.DailySale;
+import com.customermanagementsystem.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +39,7 @@ public class ForwardSale {
     private Customer customer;
 
     private Boolean isTransferred;
+
+    @ManyToOne
+    private DailySale dailySale;
 }

@@ -47,7 +47,7 @@ public class DailySale {
 
     private Double bankTransferTotal;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dailySale")
     private List<ForwardSale> forwardSales;
 
     private Double dailyForwardSaleForDiesel;
@@ -62,17 +62,17 @@ public class DailySale {
 
     private Double dailyForwardSaleAsLiterForGas;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dailySale")
     private List<CustomerPayment> customerPayments;
 
     private Double totalCustomerPayments;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dailySale")
     private List<EmployeeExpense> employeeExpenses;
 
     private Double totalEmployeeExpense;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dailySale")
     private List<PosDeviceSale> posDeviceSales;
 
     private Double totalPosDeviceSale;

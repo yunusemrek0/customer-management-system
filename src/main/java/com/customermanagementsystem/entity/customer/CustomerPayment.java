@@ -1,5 +1,6 @@
 package com.customermanagementsystem.entity.customer;
 
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,9 @@ public class CustomerPayment {
     private String description;
 
     private Boolean isTransferred;
+
+    @ManyToOne
+    private DailySale dailySale;
 
 
 }

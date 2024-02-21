@@ -1,6 +1,6 @@
 package com.customermanagementsystem.entity;
 
-import com.customermanagementsystem.entity.dealer.Dealer;
+import com.customermanagementsystem.entity.product.Dealer;
 import com.customermanagementsystem.entity.enums.TypeOfPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

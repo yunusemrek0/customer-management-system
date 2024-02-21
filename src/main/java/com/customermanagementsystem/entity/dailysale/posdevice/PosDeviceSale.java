@@ -1,5 +1,6 @@
 package com.customermanagementsystem.entity.dailysale.posdevice;
 
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,7 @@ public class PosDeviceSale {
     private PosDevice posDevice;
 
     private Boolean isTransferred;
+
+    @ManyToOne
+    private DailySale dailySale;
 }

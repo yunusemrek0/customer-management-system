@@ -1,6 +1,7 @@
 package com.customermanagementsystem.entity.employee;
 
 
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,7 @@ public class EmployeeExpense {
     private Double total;
 
     private Boolean isTransferred;
+
+    @ManyToOne
+    private DailySale dailySale;
 }

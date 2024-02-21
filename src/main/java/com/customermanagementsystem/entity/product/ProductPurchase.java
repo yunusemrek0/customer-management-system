@@ -1,4 +1,4 @@
-package com.customermanagementsystem.entity.dealer;
+package com.customermanagementsystem.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

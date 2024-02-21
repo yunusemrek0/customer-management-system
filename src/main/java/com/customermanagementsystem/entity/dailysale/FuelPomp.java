@@ -1,6 +1,6 @@
 package com.customermanagementsystem.entity.dailysale;
 
-import com.customermanagementsystem.entity.dealer.Product;
+import com.customermanagementsystem.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
