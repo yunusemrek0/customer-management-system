@@ -1,5 +1,6 @@
 package com.customermanagementsystem.entity;
 
+import com.customermanagementsystem.entity.dealer.Dealer;
 import com.customermanagementsystem.entity.enums.TypeOfPayment;
 
 import javax.persistence.EnumType;

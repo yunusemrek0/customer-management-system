@@ -1,6 +1,6 @@
 package com.customermanagementsystem.entity.dailysale;
 
-import com.customermanagementsystem.entity.Product;
+import com.customermanagementsystem.entity.dealer.Product;
 
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;

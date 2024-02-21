@@ -1,9 +1,9 @@
 package com.customermanagementsystem.entity.dailysale;
 
-import com.customermanagementsystem.entity.CashProceed;
-import com.customermanagementsystem.entity.ForwardSale;
+import com.customermanagementsystem.entity.customer.CashProceed;
+import com.customermanagementsystem.entity.customer.ForwardSale;
+import com.customermanagementsystem.entity.employee.EmployeeExpense;
 
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -50,4 +50,11 @@ public class DailySale {
 
     @OneToMany
     private List<CashProceed> cashProceeds;
+
+    private Double totalCashProceed;
+
+    @OneToMany
+    private List<EmployeeExpense> employeeExpenses;
+
+    private Double totalEmployeeExpense;
 }

@@ -1,4 +1,4 @@
-package com.customermanagementsystem.entity;
+package com.customermanagementsystem.entity.customer;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

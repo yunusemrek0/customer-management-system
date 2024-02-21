@@ -14,4 +14,6 @@ public class EmployeeExpense {
     private Employee employee;
 
     private Double total;
+
+    private Boolean isTransferred;
 }

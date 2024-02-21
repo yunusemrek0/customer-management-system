@@ -1,4 +1,4 @@
-package com.customermanagementsystem.entity;
+package com.customermanagementsystem.entity.dealer;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
