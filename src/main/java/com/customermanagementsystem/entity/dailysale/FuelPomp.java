@@ -19,4 +19,6 @@ public class FuelPomp {
 
     @ManyToOne
     private Product product;
+
+    private Boolean isTransferred;
 }

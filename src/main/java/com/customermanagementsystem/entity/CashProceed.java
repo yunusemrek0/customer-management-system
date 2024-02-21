@@ -16,5 +16,7 @@ public class CashProceed {
 
     private String description;
 
+    private Boolean isTransferred;
+
 
 }

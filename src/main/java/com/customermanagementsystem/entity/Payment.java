@@ -5,7 +5,6 @@ import com.customermanagementsystem.entity.enums.TypeOfPayment;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 public class Payment {
