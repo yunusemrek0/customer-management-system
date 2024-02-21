@@ -1,13 +1,29 @@
 package com.customermanagementsystem.entity.employee;
 
 
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "employee_expense")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class EmployeeExpense {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
     @ManyToOne

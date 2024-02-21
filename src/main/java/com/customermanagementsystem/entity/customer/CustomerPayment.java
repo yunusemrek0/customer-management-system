@@ -1,6 +1,5 @@
-package com.customermanagementsystem.entity.dailysale;
+package com.customermanagementsystem.entity.customer;
 
-import com.customermanagementsystem.entity.dealer.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,28 +10,28 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "fuel_pomp")
+@Table(name = "cash_proceed")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FuelPomp {
+public class CustomerPayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private Double oldNumerator;
-
-    private Double newNumerator;
+    @ManyToOne
+    private Customer customer;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime updateDateTime;
+    private LocalDateTime dateTime;
 
-    @ManyToOne
-    private Product product;
+    private Double total;
+
+    private String description;
 
     private Boolean isTransferred;
+
+
 }

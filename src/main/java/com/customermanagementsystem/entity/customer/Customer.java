@@ -1,12 +1,23 @@
 package com.customermanagementsystem.entity.customer;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 
 @Entity
+@Table(name = "customer")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Customer {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -25,6 +36,4 @@ public class Customer {
 
     private Double balance;
 
-    @OneToMany(mappedBy = "customer")
-    private CashProceed cashProceed;
 }
