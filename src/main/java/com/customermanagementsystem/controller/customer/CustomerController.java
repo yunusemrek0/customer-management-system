@@ -44,8 +44,8 @@ public class CustomerController {
 
 
     @GetMapping("/getByName/{customerName}")
-    public ResponseEntity<List<CustomerResponse>> getByNameWithPage(@PathVariable String customerName){
-        return ResponseEntity.ok(customerService.getByNameWithPage(customerName));
+    public ResponseEntity<List<CustomerResponse>> getByName(@PathVariable String customerName){
+        return ResponseEntity.ok(customerService.getByName(customerName));
     }
 
 }

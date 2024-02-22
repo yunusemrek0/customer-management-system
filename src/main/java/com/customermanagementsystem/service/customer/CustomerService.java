@@ -43,7 +43,7 @@ public class CustomerService {
                 .map(customerMapper::mapCustomerToCustomerResponse);
     }
 
-    public List<CustomerResponse> getByNameWithPage(String customerName) {
+    public List<CustomerResponse> getByName(String customerName) {
 
         return customerRepository.getByNameContains(customerName)
                 .stream()
