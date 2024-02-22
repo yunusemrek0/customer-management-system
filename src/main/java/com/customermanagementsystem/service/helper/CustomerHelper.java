@@ -18,4 +18,11 @@ public class CustomerHelper {
                 ()-> new ResourceNotFoundException(String.format(ErrorMessages.CUSTOMER_NOT_FOUND_ID,id))
         );
     }
+
+    public void customerBalanceCalculator(Customer customer,Double totalPayment){
+
+        double newBalance = customer.getBalance()-totalPayment;
+        customer.setBalance(newBalance);
+        customerRepository.save(customer);
+    }
 }

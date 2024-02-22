@@ -7,6 +7,10 @@ public class SuccessMessagges {
     public static final String CUSTOMER_SAVE = "Müşteri sisteme başarılı bir şekilde kaydedildi.";
     public static final String CUSTOMER_UPDATE = "Müşteri bilgileri başarılı bir şekilde güncellendi.";
 
+    //CustomerPayment
+    public static final String CUSTOMER_PAYMENT_SAVE = "Müşteri sisteme başarılı bir şekilde kaydedildi.";
+
+
     //Dealer
     public static final String DEALER_SAVE = "Bayii sisteme başarılı bir şekilde kaydedildi.";
     public static final String DEALER_UPDATE = "Bayii bilgileri başarılı bir şekilde güncellendi.";

@@ -1,6 +1,7 @@
 package com.customermanagementsystem.entity.customer;
 
 import com.customermanagementsystem.entity.dailysale.DailySale;
+import com.customermanagementsystem.entity.enums.TypeOfCustomerPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cash_proceed")
+@Table(name = "customer_payment")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +33,10 @@ public class CustomerPayment {
 
     private String description;
 
-    private Boolean isTransferred;
+    @Enumerated(EnumType.STRING)
+    private TypeOfCustomerPayment typeOfCustomerPayment;
+
+    //private Boolean isTransferred;
 
     @ManyToOne
     private DailySale dailySale;

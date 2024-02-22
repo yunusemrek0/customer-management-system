@@ -38,7 +38,7 @@ public class ForwardSale {
     @ManyToOne
     private Customer customer;
 
-    private Boolean isTransferred;
+    //private Boolean isTransferred;
 
     @ManyToOne
     private DailySale dailySale;
