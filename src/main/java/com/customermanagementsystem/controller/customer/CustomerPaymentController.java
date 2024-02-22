@@ -1,7 +1,6 @@
 package com.customermanagementsystem.controller.customer;
 
 import com.customermanagementsystem.payload.request.customer.CustomerPaymentRequest;
-import com.customermanagementsystem.payload.request.customer.CustomerRequest;
 import com.customermanagementsystem.payload.response.customer.CustomerPaymentResponse;
 import com.customermanagementsystem.service.customer.CustomerPaymentService;
 import lombok.RequiredArgsConstructor;

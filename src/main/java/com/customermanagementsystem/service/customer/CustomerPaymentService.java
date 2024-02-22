@@ -28,7 +28,7 @@ public class CustomerPaymentService {
     public String saveCustomerPayment(CustomerPaymentRequest customerPaymentRequest) {
 
         Customer customer = customerHelper.isExistById(customerPaymentRequest.getCustomerId());
-        customerHelper.customerBalanceCalculator(customer,customerPaymentRequest.getTotal());
+        customerHelper.customerBalanceCalculatorForPayment(customer,customerPaymentRequest.getTotal());
 
         CustomerPayment customerPaymentToSave = customerPaymentMapper.mapCustomerPaymentRequestToCustomerPayment(customerPaymentRequest);
         customerPaymentToSave.setCustomer(customer);

@@ -19,9 +19,16 @@ public class CustomerHelper {
         );
     }
 
-    public void customerBalanceCalculator(Customer customer,Double totalPayment){
+    public void customerBalanceCalculatorForPayment(Customer customer, Double totalPayment){
 
         double newBalance = customer.getBalance()-totalPayment;
+        customer.setBalance(newBalance);
+        customerRepository.save(customer);
+    }
+
+    public void customerBalanceCalculatorForSale(Customer customer, Double totalSale){
+
+        double newBalance = customer.getBalance()+totalSale;
         customer.setBalance(newBalance);
         customerRepository.save(customer);
     }

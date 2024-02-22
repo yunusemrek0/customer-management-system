@@ -19,4 +19,7 @@ public class SuccessMessagges {
     //Product
     public static final String PRODUCT_SAVE = "Ürün sisteme başarılı bir şekilde kaydedildi.";
     public static final String PRODUCT_UPDATE = "Ürün bilgileri başarılı bir şekilde güncellendi.";
+
+    //ForwardSale
+    public static final String FORWARD_SALE_SAVE = "Vadeli satış sisteme başarılı bir şekilde kaydedildi.";
 }
