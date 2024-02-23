@@ -32,6 +32,8 @@ public class EmployeeExpense {
 
     private Double total;
 
+    private String description;
+
     @ManyToOne
     private DailySale dailySale;
 }

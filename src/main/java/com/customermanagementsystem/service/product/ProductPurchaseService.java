@@ -4,7 +4,7 @@ import com.customermanagementsystem.entity.product.Dealer;
 import com.customermanagementsystem.entity.product.Product;
 import com.customermanagementsystem.entity.product.ProductPurchase;
 import com.customermanagementsystem.payload.mapper.product.ProductPurchaseMapper;
-import com.customermanagementsystem.payload.messages.SuccessMessagges;
+import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.product.ProductPurchaseRequest;
 import com.customermanagementsystem.payload.response.product.ProductPurchaseResponse;
 import com.customermanagementsystem.repository.product.ProductPurchaseRepository;
@@ -41,7 +41,7 @@ public class ProductPurchaseService {
 
         productPurchaseRepository.save(productPurchaseToSave);
 
-        return SuccessMessagges.PRODUCT_PURCHASE_SAVE;
+        return SuccessMessages.PRODUCT_PURCHASE_SAVE;
 
     }
 

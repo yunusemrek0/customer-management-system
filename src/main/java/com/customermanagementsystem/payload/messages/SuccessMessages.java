@@ -1,6 +1,6 @@
 package com.customermanagementsystem.payload.messages;
 
-public class SuccessMessagges {
+public class SuccessMessages {
 
 
     //Customer
@@ -26,4 +26,7 @@ public class SuccessMessagges {
 
     //ProductPurchase
     public static final String PRODUCT_PURCHASE_SAVE = "Ürün alımı sisteme başarılı bir şekilde kaydedildi.";
+
+    //Employee
+    public static final String EMPLOYEE_SAVE = "Personel sisteme başarılı bir şekilde kaydedildi.";
 }

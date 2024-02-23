@@ -4,7 +4,7 @@ import com.customermanagementsystem.entity.customer.Customer;
 import com.customermanagementsystem.entity.customer.ForwardSale;
 import com.customermanagementsystem.entity.product.Product;
 import com.customermanagementsystem.payload.mapper.customer.ForwardSaleMapper;
-import com.customermanagementsystem.payload.messages.SuccessMessagges;
+import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.customer.ForwardSaleRequest;
 import com.customermanagementsystem.payload.response.customer.ForwardSaleResponse;
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
@@ -42,7 +42,7 @@ public class ForwardSaleService {
 
         customerHelper.customerBalanceCalculatorForSale(customer,forwardSaleToSave.getTotal());
 
-        return SuccessMessagges.FORWARD_SALE_SAVE;
+        return SuccessMessages.FORWARD_SALE_SAVE;
     }
 
     public List<ForwardSaleResponse> getByCustomer(Long customerId) {

@@ -3,7 +3,7 @@ package com.customermanagementsystem.service.customer;
 import com.customermanagementsystem.entity.customer.Customer;
 import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.payload.mapper.customer.CustomerPaymentMapper;
-import com.customermanagementsystem.payload.messages.SuccessMessagges;
+import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.customer.CustomerPaymentRequest;
 import com.customermanagementsystem.payload.response.customer.CustomerPaymentResponse;
 import com.customermanagementsystem.repository.customer.CustomerPaymentRepository;
@@ -35,7 +35,7 @@ public class CustomerPaymentService {
 
         customerPaymentRepository.save(customerPaymentToSave);
 
-        return SuccessMessagges.CUSTOMER_PAYMENT_SAVE;
+        return SuccessMessages.CUSTOMER_PAYMENT_SAVE;
 
     }
 

@@ -3,7 +3,7 @@ package com.customermanagementsystem.service.product;
 import com.customermanagementsystem.entity.product.Dealer;
 import com.customermanagementsystem.entity.product.Product;
 import com.customermanagementsystem.payload.mapper.product.ProductMapper;
-import com.customermanagementsystem.payload.messages.SuccessMessagges;
+import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.product.ProductRequest;
 import com.customermanagementsystem.payload.response.product.ProductResponse;
 import com.customermanagementsystem.repository.product.ProductRepository;
@@ -34,7 +34,7 @@ public class ProductService {
 
         productRepository.save(productToSave);
 
-        return SuccessMessagges.PRODUCT_SAVE;
+        return SuccessMessages.PRODUCT_SAVE;
 
     }
 
@@ -49,7 +49,7 @@ public class ProductService {
 
         productRepository.save(productToUpdate);
 
-        return SuccessMessagges.PRODUCT_UPDATE;
+        return SuccessMessages.PRODUCT_UPDATE;
     }
 
     public List<ProductResponse> getAll() {

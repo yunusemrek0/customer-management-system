@@ -2,7 +2,7 @@ package com.customermanagementsystem.service.customer;
 
 import com.customermanagementsystem.entity.customer.Customer;
 import com.customermanagementsystem.payload.mapper.customer.CustomerMapper;
-import com.customermanagementsystem.payload.messages.SuccessMessagges;
+import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.customer.CustomerRequest;
 import com.customermanagementsystem.payload.response.customer.CustomerResponse;
 import com.customermanagementsystem.repository.customer.CustomerRepository;
@@ -31,7 +31,7 @@ public class CustomerService {
         Customer customerToSave = customerMapper.mapCustomerRequestToCustomer(customerRequest);
         customerRepository.save(customerToSave);
 
-        return SuccessMessagges.CUSTOMER_SAVE;
+        return SuccessMessages.CUSTOMER_SAVE;
     }
 
     public Page<CustomerResponse> getByPage(int page, int size, String sort, String type) {
@@ -59,7 +59,7 @@ public class CustomerService {
         customerToUpdate.setId(id);
         customerRepository.save(customerToUpdate);
 
-        return SuccessMessagges.CUSTOMER_UPDATE;
+        return SuccessMessages.CUSTOMER_UPDATE;
 
 
     }
