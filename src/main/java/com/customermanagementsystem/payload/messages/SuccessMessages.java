@@ -29,4 +29,7 @@ public class SuccessMessages {
 
     //Employee
     public static final String EMPLOYEE_SAVE = "Personel sisteme başarılı bir şekilde kaydedildi.";
+
+    //EmployeeExpense
+    public static final String EMPLOYEE_EXPENSE_SAVE = "Personel gideri sisteme başarılı bir şekilde kaydedildi.";
 }
