@@ -19,4 +19,13 @@ public class DealerHelper {
                 ()-> new ResourceNotFoundException(String.format(ErrorMessages.DEALER_NOT_FOUND_ID,id))
         );
     }
+
+
+    public void dealerBalanceCalculatorForPurchase(Dealer dealer,Double totalPurchase){
+
+        double newBalance = dealer.getBalance()+totalPurchase;
+        dealer.setBalance(newBalance);
+        dealerRepository.save(dealer);
+
+    }
 }

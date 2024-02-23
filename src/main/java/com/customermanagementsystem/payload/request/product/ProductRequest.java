@@ -1,6 +1,5 @@
 package com.customermanagementsystem.payload.request.product;
 
-import com.customermanagementsystem.entity.product.Dealer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

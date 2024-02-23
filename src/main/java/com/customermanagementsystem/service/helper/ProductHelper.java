@@ -19,4 +19,18 @@ public class ProductHelper {
                 ()-> new ResourceNotFoundException(String.format(ErrorMessages.PRODUCT_NOT_FOUND_ID,id))
         );
     }
+
+    public void productStockCalculatorForPurchase(Product product,Double totalAmount){
+
+        double newTotalAmount = product.getStockAmountAsLiter()+totalAmount;
+        product.setStockAmountAsLiter(newTotalAmount);
+        productRepository.save(product);
+    }
+
+    public void productStockCalculatorForDailySale (Product product,Double totalAmount){
+
+        double newTotalAmount = product.getStockAmountAsLiter()+totalAmount;
+        product.setStockAmountAsLiter(newTotalAmount);
+        productRepository.save(product);
+    }
 }

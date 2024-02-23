@@ -30,7 +30,6 @@ public class PosDeviceSale {
     @ManyToOne
     private PosDevice posDevice;
 
-    private Boolean isTransferred;
 
     @ManyToOne
     private DailySale dailySale;

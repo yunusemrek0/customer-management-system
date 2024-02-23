@@ -32,8 +32,6 @@ public class EmployeeExpense {
 
     private Double total;
 
-    private Boolean isTransferred;
-
     @ManyToOne
     private DailySale dailySale;
 }

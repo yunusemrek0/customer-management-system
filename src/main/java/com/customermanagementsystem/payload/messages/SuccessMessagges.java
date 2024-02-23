@@ -22,4 +22,8 @@ public class SuccessMessagges {
 
     //ForwardSale
     public static final String FORWARD_SALE_SAVE = "Vadeli satış sisteme başarılı bir şekilde kaydedildi.";
+
+
+    //ProductPurchase
+    public static final String PRODUCT_PURCHASE_SAVE = "Ürün alımı sisteme başarılı bir şekilde kaydedildi.";
 }

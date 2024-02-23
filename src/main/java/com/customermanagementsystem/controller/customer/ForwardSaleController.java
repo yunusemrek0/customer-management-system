@@ -16,14 +16,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ForwardSaleController {
 
-    private final ForwardSaleService forwardSaleService;
 
+
+    private final ForwardSaleService forwardSaleService;
 
 
     @PostMapping("/save")
     public ResponseEntity<String> saveForwardSale(@Valid @RequestBody ForwardSaleRequest forwardSaleRequest){
         return ResponseEntity.ok(forwardSaleService.saveForwardSale(forwardSaleRequest));
     }
+
 
     @GetMapping("/getByCustomer/{customerId}")
     public ResponseEntity<List<ForwardSaleResponse>> getByCustomer(@PathVariable Long customerId){

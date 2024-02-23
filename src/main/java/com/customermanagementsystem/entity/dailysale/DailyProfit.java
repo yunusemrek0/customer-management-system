@@ -25,7 +25,7 @@ public class DailyProfit {
     private LocalDateTime dateTime;
 
     @OneToOne
-    private DailyProfit dailyProfit;
+    private DailySale dailySale;
 
     private Double profit;
 
