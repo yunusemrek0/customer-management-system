@@ -6,6 +6,7 @@ import com.customermanagementsystem.entity.product.Product;
 import com.customermanagementsystem.payload.mapper.customer.ForwardSaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessagges;
 import com.customermanagementsystem.payload.request.customer.ForwardSaleRequest;
+import com.customermanagementsystem.payload.response.customer.ForwardSaleResponse;
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
 import com.customermanagementsystem.service.helper.CustomerHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +43,17 @@ public class ForwardSaleService {
         customerHelper.customerBalanceCalculatorForSale(customer,forwardSaleToSave.getTotal());
 
         return SuccessMessagges.FORWARD_SALE_SAVE;
+    }
+
+    public List<ForwardSaleResponse> getByCustomer(Long customerId) {
+
+        customerHelper.isExistById(customerId);
+
+        return forwardSaleRepository.getByCustomerId(customerId)
+                .stream()
+                .map(forwardSaleMapper::mapForwardSaleToForwardSaleResponse)
+                .collect(Collectors.toList());
+
+
     }
 }

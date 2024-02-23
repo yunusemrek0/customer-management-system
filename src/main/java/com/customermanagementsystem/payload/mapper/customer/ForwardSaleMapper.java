@@ -20,6 +20,7 @@ public class ForwardSaleMapper {
                 .amount(forwardSaleRequest.getAmount())
                 .total(forwardSaleRequest.getUnitPrice()*forwardSaleRequest.getAmount())
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
+                .build();
     }
 
 
