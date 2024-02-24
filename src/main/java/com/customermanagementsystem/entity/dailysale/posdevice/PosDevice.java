@@ -26,7 +26,5 @@ public class PosDevice {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime creationDate;
 
-    private Double balance;
-
 
 }

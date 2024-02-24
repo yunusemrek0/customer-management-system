@@ -32,4 +32,12 @@ public class SuccessMessages {
 
     //EmployeeExpense
     public static final String EMPLOYEE_EXPENSE_SAVE = "Personel gideri sisteme başarılı bir şekilde kaydedildi.";
+
+    //PosDevice
+    public static final String POS_DEVICE_SAVE = "Pos cihazı sisteme başarılı bir şekilde kaydedildi.";
+
+
+
+
+
 }
