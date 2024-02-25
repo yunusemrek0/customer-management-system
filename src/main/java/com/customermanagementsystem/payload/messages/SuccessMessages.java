@@ -36,6 +36,9 @@ public class SuccessMessages {
     //PosDevice
     public static final String POS_DEVICE_SAVE = "Pos cihazı sisteme başarılı bir şekilde kaydedildi.";
 
+    //PosDeviceSle
+    public static final String POS_DEVICE_SALE_SAVE = "Pos cihazlı satış sisteme başarılı bir şekilde kaydedildi.";
+
 
 
 
