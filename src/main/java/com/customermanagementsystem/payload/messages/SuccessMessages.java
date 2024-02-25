@@ -39,8 +39,7 @@ public class SuccessMessages {
     //PosDeviceSle
     public static final String POS_DEVICE_SALE_SAVE = "Pos cihazlı satış sisteme başarılı bir şekilde kaydedildi.";
 
-
-
-
-
+    //FuelPomp
+    public static final String FUEL_POMP_SAVE = "Pompa sisteme başarılı bir şekilde kaydedildi.";
+    public static final String FUEL_POMP_UPDATE = "Pompa satış verileri sisteme başarılı bir şekilde kaydedildi.";
 }

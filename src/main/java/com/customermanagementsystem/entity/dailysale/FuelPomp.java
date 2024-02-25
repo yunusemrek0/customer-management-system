@@ -35,4 +35,7 @@ public class FuelPomp {
     private Product product;
 
     private Boolean isTransferred;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime creationDate;
 }
