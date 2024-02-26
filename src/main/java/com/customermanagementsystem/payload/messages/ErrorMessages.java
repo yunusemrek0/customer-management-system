@@ -8,4 +8,6 @@ public class ErrorMessages {
     public static final String EMPLOYEE_NOT_FOUND_ID = "Personel id: %s ile bulunamadı.";
 
     public static final String POS_DEVICE_NOT_FOUND_ID = "Pos cihazı id: %s ile bulunamadı.";
+
+    public static final String FUEL_POMP_NOT_FOUND_ID = "Akaryakıt pompası id: %s ile bulunamadı.";
 }

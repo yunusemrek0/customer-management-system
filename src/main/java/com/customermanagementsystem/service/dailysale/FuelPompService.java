@@ -7,6 +7,7 @@ import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToSave;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToUpdate;
 import com.customermanagementsystem.repository.dailysale.FuelPompRepository;
+import com.customermanagementsystem.service.helper.FuelPompHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class FuelPompService {
     private final FuelPompRepository fuelPompRepository;
     private final FuelPompMapper fuelPompMapper;
     private final ProductHelper productHelper;
+    private final FuelPompHelper fuelPompHelper;
 
     public String saveFuelPomp(FuelPompRequestToSave fuelPompRequest) {
 
@@ -34,6 +36,17 @@ public class FuelPompService {
 
     public String updateFuelPomp(FuelPompRequestToUpdate fuelPompRequest, Long id) {
 
-        return null;
+        FuelPomp fuelPomp = fuelPompHelper.isExistById(id);
+
+        FuelPomp fuelPompToUpdate = fuelPompMapper.mapFuelPompRequestToUpdateToFuelPomp(fuelPompRequest);
+        fuelPompToUpdate.setId(id);
+        fuelPompToUpdate.setName(fuelPomp.getName());
+        fuelPompToUpdate.setProduct(fuelPomp.getProduct());
+        fuelPompToUpdate.setCreationDate(fuelPomp.getCreationDate());
+        fuelPompToUpdate.setOldNumerator(fuelPomp.getNewNumerator());
+
+        fuelPompRepository.save(fuelPompToUpdate);
+
+        return SuccessMessages.FUEL_POMP_UPDATE;
     }
 }
