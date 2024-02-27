@@ -1,4 +1,4 @@
-package com.customermanagementsystem.entity.dailysale;
+package com.customermanagementsystem.entity.dailysale.fuelpomp;
 
 import com.customermanagementsystem.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "fuel_pomp")
@@ -38,4 +39,7 @@ public class FuelPomp {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime creationDate;
+
+    @OneToMany(mappedBy = "fuelPomp")
+    private List<FuelPompStatistic> fuelPompStatistics;
 }

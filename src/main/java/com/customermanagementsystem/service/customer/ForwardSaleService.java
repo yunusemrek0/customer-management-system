@@ -1,7 +1,7 @@
 package com.customermanagementsystem.service.customer;
 
 import com.customermanagementsystem.entity.customer.Customer;
-import com.customermanagementsystem.entity.customer.ForwardSale;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.entity.product.Product;
 import com.customermanagementsystem.payload.mapper.customer.ForwardSaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;

@@ -1,5 +1,6 @@
-package com.customermanagementsystem.entity.customer;
+package com.customermanagementsystem.entity.customer.forwardsale;
 
+import com.customermanagementsystem.entity.customer.Customer;
 import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;

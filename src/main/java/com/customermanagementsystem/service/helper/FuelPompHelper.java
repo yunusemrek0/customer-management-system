@@ -1,6 +1,6 @@
 package com.customermanagementsystem.service.helper;
 
-import com.customermanagementsystem.entity.dailysale.FuelPomp;
+import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.exception.ResourceNotFoundException;
 import com.customermanagementsystem.payload.messages.ErrorMessages;
 import com.customermanagementsystem.repository.dailysale.FuelPompRepository;

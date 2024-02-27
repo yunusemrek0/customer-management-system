@@ -1,6 +1,6 @@
 package com.customermanagementsystem.payload.mapper.customer;
 
-import com.customermanagementsystem.entity.customer.ForwardSale;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.payload.request.customer.ForwardSaleRequest;
 import com.customermanagementsystem.payload.response.customer.ForwardSaleResponse;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;

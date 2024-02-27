@@ -1,6 +1,6 @@
 package com.customermanagementsystem.payload.mapper.dailysale;
 
-import com.customermanagementsystem.entity.dailysale.FuelPomp;
+import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToSave;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToUpdate;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;

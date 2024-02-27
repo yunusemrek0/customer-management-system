@@ -1,11 +1,14 @@
 package com.customermanagementsystem.entity.product;
 
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSaleStatistic;
+import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -34,6 +37,12 @@ public class Product {
     @ManyToOne
     private Dealer dealer;
 
+    @OneToMany(mappedBy = "product")
+    private List<FuelPompStatistic> fuelPompStatistics;
+
+
+    @OneToMany(mappedBy = "product")
+    private List<ForwardSaleStatistic> forwardSaleStatistics;
 
 
 }

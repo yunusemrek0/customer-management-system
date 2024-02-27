@@ -1,7 +1,9 @@
 package com.customermanagementsystem.entity.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
-import com.customermanagementsystem.entity.customer.ForwardSale;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSaleStatistic;
+import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,41 +33,31 @@ public class DailySale {
 
     private Double reportZ;
 
-    private Double dailySaleForDiesel;
+    @OneToMany(mappedBy = "dailySale")
+    private List<FuelPompStatistic> fuelPompStatistics;
 
-    private Double dailySaleAsLiterForDiesel;
-
-    private Double dailyForGasoline;
-
-    private Double dailySaleAsLiterForGasoline;
-
-    private Double dailySaleForGas;
-
-    private Double dailySaleAsLiterForGas;
+    private Double totalFuelPompSales;
 
     private Double totalCash;
 
     private Double bankTransferTotal;
 
+
     @OneToMany(mappedBy = "dailySale")
     private List<ForwardSale> forwardSales;
 
-    private Double dailyForwardSaleForDiesel;
+    @OneToMany(mappedBy = "dailySale")
+    private List<ForwardSaleStatistic> forwardSaleStatistics;
 
-    private Double dailyForwardSaleAsLiterForDiesel;
+    private Double totalForwardSales;
 
-    private Double dailyForwardSaleForGasoline;
-
-    private Double dailyForwardSaleAsLiterForGasoline;
-
-    private Double dailyForwardSaleForGas;
-
-    private Double dailyForwardSaleAsLiterForGas;
 
     @OneToMany(mappedBy = "dailySale")
     private List<CustomerPayment> customerPayments;
 
-    private Double totalCustomerPayments;
+    private Double totalCustomerPaymentsWithCash;
+
+    private Double totalCustomerPaymentWithCreditCard;
 
     @OneToMany(mappedBy = "dailySale")
     private List<EmployeeExpense> employeeExpenses;
