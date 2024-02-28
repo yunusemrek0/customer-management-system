@@ -35,6 +35,7 @@ public class FuelPompStatisticHelperForDailySale {
                     .fuelPomp(fuelPomp)
                     .product(fuelPomp.getProduct())
                     .total(total)
+                    .amountAsLiter(amount)
                     .dateTime(dateTimeTranslator.parseLocalDateTime())
                     .build();
 

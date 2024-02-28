@@ -7,10 +7,7 @@ import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
 import com.customermanagementsystem.repository.dailysale.DailySaleRepository;
-import com.customermanagementsystem.service.helper.dailysale.CustomerPaymentHelperForDailySale;
-import com.customermanagementsystem.service.helper.dailysale.EmployeeExpenseHelperForDailySale;
-import com.customermanagementsystem.service.helper.dailysale.ForwardSaleHelperForDailySale;
-import com.customermanagementsystem.service.helper.dailysale.FuelPompStatisticHelperForDailySale;
+import com.customermanagementsystem.service.helper.dailysale.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +22,7 @@ public class DailySaleService {
     private final FuelPompStatisticHelperForDailySale fuelPompStatisticHelper;
     private final CustomerPaymentHelperForDailySale paymentHelper;
     private final EmployeeExpenseHelperForDailySale employeeExpenseHelper;
+    private final PosDeviceSaleHelperForDailySale posDeviceSaleHelper;
 
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
 
@@ -43,8 +41,8 @@ public class DailySaleService {
         List<EmployeeExpense> employeeExpenses = employeeExpenseHelper.getByDailySaleIsNull();
         double totalEmployeeExpense = employeeExpenseHelper.totalEmployeeExpense(employeeExpenses);
 
-        List<PosDeviceSale> posDeviceSales;
-        double totalPosDeviceSale;
+        List<PosDeviceSale> posDeviceSales = posDeviceSaleHelper.getByDailySaleIsNull();
+        double totalPosDeviceSale = posDeviceSaleHelper.totalPosDeviceSale(posDeviceSales);
 
 
         return null;
