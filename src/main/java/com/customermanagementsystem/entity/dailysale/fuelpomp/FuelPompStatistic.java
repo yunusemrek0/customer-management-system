@@ -26,15 +26,20 @@ public class FuelPompStatistic {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
+
     @ManyToOne
     private Product product;
+
 
     @ManyToOne
     private FuelPomp fuelPomp;
 
+
     private Double amountAsLiter;
 
+
     private Double total;
+
 
     @ManyToOne
     private DailySale dailySale;

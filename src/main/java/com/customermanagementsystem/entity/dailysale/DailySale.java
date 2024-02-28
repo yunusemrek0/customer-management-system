@@ -2,7 +2,6 @@ package com.customermanagementsystem.entity.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
-import com.customermanagementsystem.entity.customer.forwardsale.ForwardSaleStatistic;
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
@@ -46,10 +45,10 @@ public class DailySale {
     @OneToMany(mappedBy = "dailySale")
     private List<ForwardSale> forwardSales;
 
-    @OneToMany(mappedBy = "dailySale")
-    private List<ForwardSaleStatistic> forwardSaleStatistics;
 
-    private Double totalForwardSales;
+    private Double totalForwardSalesForCashPrice;
+
+    private Double totalForwardSalesForForwardPrice;
 
 
     @OneToMany(mappedBy = "dailySale")
@@ -57,7 +56,7 @@ public class DailySale {
 
     private Double totalCustomerPaymentsWithCash;
 
-    private Double totalCustomerPaymentWithCreditCard;
+    private Double totalCustomerPaymentsWithCreditCard;
 
     @OneToMany(mappedBy = "dailySale")
     private List<EmployeeExpense> employeeExpenses;

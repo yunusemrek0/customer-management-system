@@ -20,30 +20,23 @@ public class ForwardSaleHelperForDailySale {
         return forwardSaleRepository.getByDailySaleIsNull();
     }
 
+    public double totalSaleAsCash(List<ForwardSale> forwardSales){
+        double total =0;
+        for (ForwardSale forwardSale:forwardSales){
+            total+=forwardSale.getProduct().getPriceForCash() * forwardSale.getAmount();
+        }
 
+        return total;
+    }
 
+    public double totalSaleAsForward(List<ForwardSale> forwardSales){
+        double total =0;
+        for (ForwardSale forwardSale:forwardSales){
+            total+=forwardSale.getTotal();
+        }
 
-    public void forwardSaleCalculatorForDailySale(DailySale dailySale){
-
-        //dailySale.setDailyForwardSaleForDiesel();
-
+        return total;
     }
 
 
-/*
-    @OneToMany(mappedBy = "dailySale")
-    private List<ForwardSale> forwardSales;
-
-    private Double dailyForwardSaleForDiesel;
-
-    private Double dailyForwardSaleAsLiterForDiesel;
-
-    private Double dailyForwardSaleForGasoline;
-
-    private Double dailyForwardSaleAsLiterForGasoline;
-
-    private Double dailyForwardSaleForGas;
-
-    private Double dailyForwardSaleAsLiterForGas;
- */
 }

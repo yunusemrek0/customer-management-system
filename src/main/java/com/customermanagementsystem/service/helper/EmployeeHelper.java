@@ -2,11 +2,14 @@ package com.customermanagementsystem.service.helper;
 
 
 import com.customermanagementsystem.entity.employee.Employee;
+import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.exception.ResourceNotFoundException;
 import com.customermanagementsystem.payload.messages.ErrorMessages;
 import com.customermanagementsystem.repository.employee.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -27,6 +30,7 @@ public class EmployeeHelper {
         employee.setBalance(newBalance);
         employeeRepository.save(employee);
     }
+
 
 
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface EmployeeExpenseRepository extends JpaRepository<EmployeeExpense,Long> {
 
     List<EmployeeExpense> getByEmployeeId(Long employeeId);
+
+    List<EmployeeExpense> getByDailySaleIsNull();
 }

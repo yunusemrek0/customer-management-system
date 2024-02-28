@@ -11,4 +11,6 @@ import java.util.List;
 public interface PosDeviceSaleRepository extends JpaRepository<PosDeviceSale,Long> {
 
     List<PosDeviceSale> findByDateTimeBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+
+    List<PosDeviceSale> getByDailySaleIsNull();
 }

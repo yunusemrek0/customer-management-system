@@ -36,7 +36,6 @@ public class CustomerPayment {
     @Enumerated(EnumType.STRING)
     private TypeOfCustomerPayment typeOfCustomerPayment;
 
-    //private Boolean isTransferred;
 
     @ManyToOne
     private DailySale dailySale;

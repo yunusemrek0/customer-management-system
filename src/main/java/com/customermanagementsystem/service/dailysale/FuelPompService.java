@@ -6,7 +6,7 @@ import com.customermanagementsystem.payload.mapper.dailysale.FuelPompMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToSave;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToUpdate;
-import com.customermanagementsystem.repository.dailysale.FuelPompRepository;
+import com.customermanagementsystem.repository.dailysale.fuelpomp.FuelPompRepository;
 import com.customermanagementsystem.service.helper.FuelPompHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;

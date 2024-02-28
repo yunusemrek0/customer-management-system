@@ -14,4 +14,6 @@ public class DailySaleRequest {
     private Double reportZ;
 
     private Double totalCash;
+
+    private Double bankTransferTotal;
 }
