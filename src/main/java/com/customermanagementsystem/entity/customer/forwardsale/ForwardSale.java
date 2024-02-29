@@ -30,6 +30,8 @@ public class ForwardSale {
     @ManyToOne
     private Product product;
 
+    private Double cashPrice;
+
     private Double unitPrice;
 
     private Double amount;

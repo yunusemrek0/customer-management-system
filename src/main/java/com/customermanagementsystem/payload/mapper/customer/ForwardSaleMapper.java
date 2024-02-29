@@ -13,6 +13,8 @@ public class ForwardSaleMapper {
 
     private final DateTimeTranslator dateTimeTranslator;
 
+
+    //TODO cashPrice will be added.
     public ForwardSale mapForwardSaleRequestToForwardSale(ForwardSaleRequest forwardSaleRequest){
 
         return ForwardSale.builder()

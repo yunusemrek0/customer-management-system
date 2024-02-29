@@ -24,7 +24,7 @@ public class ForwardSaleHelperForDailySale {
     public double totalSaleAsCash(List<ForwardSale> forwardSales){
         double total =0;
         for (ForwardSale forwardSale:forwardSales){
-            total+=forwardSale.getProduct().getPriceForCash() * forwardSale.getAmount();
+            total=total+(  (forwardSale.getProduct().getPriceForCash() * forwardSale.getAmount()) );
         }
 
         return total;
