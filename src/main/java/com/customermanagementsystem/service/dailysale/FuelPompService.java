@@ -2,7 +2,7 @@ package com.customermanagementsystem.service.dailysale;
 
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.entity.product.Product;
-import com.customermanagementsystem.payload.mapper.dailysale.FuelPompMapper;
+import com.customermanagementsystem.payload.mapper.dailysale.fuelpomp.FuelPompMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToSave;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToUpdate;

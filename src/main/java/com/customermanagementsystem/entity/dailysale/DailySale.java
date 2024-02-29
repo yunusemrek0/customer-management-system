@@ -45,7 +45,6 @@ public class DailySale {
     @OneToMany(mappedBy = "dailySale")
     private List<ForwardSale> forwardSales;
 
-
     private Double totalForwardSalesForCashPrice;
 
     private Double totalForwardSalesForForwardPrice;
@@ -68,7 +67,7 @@ public class DailySale {
 
     private Double totalPosDeviceSale;
 
-    private Double totalForReportZ;
+    private Double balance;
 
     private Double totalIncome;
 }

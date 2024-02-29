@@ -1,4 +1,4 @@
-package com.customermanagementsystem.payload.mapper.dailysale;
+package com.customermanagementsystem.payload.mapper.dailysale.fuelpomp;
 
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;

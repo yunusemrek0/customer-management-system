@@ -1,6 +1,8 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
+import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.repository.dailysale.posdevice.PosDeviceSaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -25,5 +27,12 @@ public class PosDeviceSaleHelperForDailySale {
         }
 
         return total;
+    }
+
+    public void saveDailySaleFoPosDeviceSale(List<PosDeviceSale> posDeviceSales, DailySale dailySale){
+        for (PosDeviceSale posDeviceSale:posDeviceSales){
+            posDeviceSale.setDailySale(dailySale);
+            posDeviceSaleRepository.save(posDeviceSale);
+        }
     }
 }

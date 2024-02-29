@@ -1,5 +1,6 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import com.customermanagementsystem.repository.dailysale.fuelpomp.FuelPompStatisticRepository;
@@ -57,5 +58,13 @@ public class FuelPompStatisticHelperForDailySale {
         }
 
         return total;
+    }
+
+
+    public void saveDailySaleForFuelStatistic(List<FuelPompStatistic> fuelPompStatistics, DailySale dailySale){
+        for (FuelPompStatistic fuelPompStatistic:fuelPompStatistics){
+            fuelPompStatistic.setDailySale(dailySale);
+            fuelPompStatisticRepository.save(fuelPompStatistic);
+        }
     }
 }

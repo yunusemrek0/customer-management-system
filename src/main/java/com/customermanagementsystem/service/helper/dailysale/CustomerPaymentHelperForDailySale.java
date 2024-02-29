@@ -1,6 +1,8 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
+import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.enums.TypeOfCustomerPayment;
 import com.customermanagementsystem.repository.customer.CustomerPaymentRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +41,12 @@ public class CustomerPaymentHelperForDailySale {
             }
         }
         return total;
+    }
+
+    public void saveDailySaleForCustomerPayment(List<CustomerPayment> customerPayments, DailySale dailySale){
+        for (CustomerPayment customerPayment:customerPayments){
+            customerPayment.setDailySale(dailySale);
+            customerPaymentRepository.save(customerPayment);
+        }
     }
 }
