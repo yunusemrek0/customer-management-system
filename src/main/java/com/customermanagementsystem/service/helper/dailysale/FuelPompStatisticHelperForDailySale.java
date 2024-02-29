@@ -21,32 +21,9 @@ public class FuelPompStatisticHelperForDailySale {
     private final DateTimeTranslator dateTimeTranslator;
     private final FuelPompStatisticRepository fuelPompStatisticRepository;
 
-    @Transactional
-    public List<FuelPompStatistic> fuelPompStatisticCalculator(){
+    public List<FuelPompStatistic> getByDailySaleIsNull(){
 
-        List<FuelPompStatistic> fuelPompStatistics = new ArrayList<>();
-        List<FuelPomp> fuelPompUnTransferred = fuelPompHelper.getByTransferredIsNull();
-
-        for (FuelPomp fuelPomp:fuelPompUnTransferred){
-
-            double amount = fuelPomp.getNewNumerator() - fuelPomp.getOldNumerator();
-            double total = amount * fuelPomp.getProduct().getPriceForCash();
-
-            FuelPompStatistic fuelPompStatisticToSave = FuelPompStatistic.builder()
-                    .fuelPomp(fuelPomp)
-                    .product(fuelPomp.getProduct())
-                    .total(total)
-                    .amountAsLiter(amount)
-                    .dateTime(dateTimeTranslator.parseLocalDateTime())
-                    .build();
-
-            FuelPompStatistic fuelPompStatistic = fuelPompStatisticRepository.save(fuelPompStatisticToSave);
-            fuelPompStatistics.add(fuelPompStatistic);
-
-    }
-
-
-        return fuelPompStatistics;
+        return fuelPompStatisticRepository.getByDailySaleIsNull();
     }
 
 

@@ -33,7 +33,7 @@ public class DailySaleService {
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
 
 
-        List<FuelPompStatistic> fuelPompStatistics = fuelPompStatisticHelper.fuelPompStatisticCalculator();
+        List<FuelPompStatistic> fuelPompStatistics = fuelPompStatisticHelper.getByDailySaleIsNull();
         double totalFuelPompSales = fuelPompStatisticHelper.totalFuelPompSales(fuelPompStatistics);
 
         List<ForwardSale> forwardSales = forwardSaleHelper.getByDailySaleIsNull();

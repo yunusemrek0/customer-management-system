@@ -25,4 +25,11 @@ public class FuelPompHelper {
     public List<FuelPomp> getByTransferredIsNull(){
         return fuelPompRepository.getByIsTransferredIsNull();
     }
+
+    public void makeIsTransferredTrue(List<FuelPomp> fuelPomps){
+        for (FuelPomp fuelPomp:fuelPomps){
+            fuelPomp.setIsTransferred(true);
+            fuelPompRepository.save(fuelPomp);
+        }
+    }
 }
