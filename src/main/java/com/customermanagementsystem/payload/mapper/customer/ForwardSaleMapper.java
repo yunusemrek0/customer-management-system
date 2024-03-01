@@ -15,9 +15,10 @@ public class ForwardSaleMapper {
 
 
     //TODO cashPrice will be added.
-    public ForwardSale mapForwardSaleRequestToForwardSale(ForwardSaleRequest forwardSaleRequest){
+    public ForwardSale mapForwardSaleRequestToForwardSale(ForwardSaleRequest forwardSaleRequest,Double cashPrice){
 
         return ForwardSale.builder()
+                .cashPrice(cashPrice)
                 .unitPrice(forwardSaleRequest.getUnitPrice())
                 .amount(forwardSaleRequest.getAmount())
                 .total(forwardSaleRequest.getUnitPrice()*forwardSaleRequest.getAmount())

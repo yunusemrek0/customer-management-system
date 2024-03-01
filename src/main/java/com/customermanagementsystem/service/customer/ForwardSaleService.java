@@ -34,7 +34,7 @@ public class ForwardSaleService {
         Customer customer = customerHelper.isExistById(forwardSaleRequest.getCustomerId());
 
 
-        ForwardSale forwardSaleToSave = forwardSaleMapper.mapForwardSaleRequestToForwardSale(forwardSaleRequest);
+        ForwardSale forwardSaleToSave = forwardSaleMapper.mapForwardSaleRequestToForwardSale(forwardSaleRequest,product.getPriceForCash());
         forwardSaleToSave.setCustomer(customer);
         forwardSaleToSave.setProduct(product);
 
