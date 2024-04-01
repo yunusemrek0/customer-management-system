@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/customer")
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class CustomerController {
     }
 
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllByPage")
     public ResponseEntity<Page<CustomerResponse>> getByPage(
             @RequestParam (value = "page", defaultValue = "0") int page,
             @RequestParam (value = "size", defaultValue = "10") int size,
@@ -40,6 +41,16 @@ public class CustomerController {
             @RequestParam (value = "type", defaultValue = "desc") String type
     ){
         return ResponseEntity.ok(customerService.getByPage(page,size,sort,type));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<CustomerResponse>> getAll(){
+        return ResponseEntity.ok(customerService.getAll());
+    }
+
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<CustomerResponse> getById(@PathVariable Long id){
+        return ResponseEntity.ok(customerService.getById(id));
     }
 
 

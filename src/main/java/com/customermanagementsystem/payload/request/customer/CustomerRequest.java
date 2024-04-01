@@ -28,6 +28,6 @@ public class CustomerRequest {
 
     private String taxNo;
 
-    @NotNull(message = "Bakiye kısmı boş geçilemez.")
+
     private Double balance;
 }

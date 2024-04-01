@@ -4,7 +4,9 @@ import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.payload.request.dailysale.posdevice.PosDeviceSaleRequest;
 import com.customermanagementsystem.payload.response.dailysale.posdevice.PosDeviceSaleResponse;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,12 +14,13 @@ import org.springframework.stereotype.Component;
 public class PosDeviceSaleMapper {
 
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
 
     public PosDeviceSale mapPosDeviceSaleRequestToPosDeviceSale(PosDeviceSaleRequest posDeviceSaleRequest){
 
         return PosDeviceSale.builder()
-                .total(posDeviceSaleRequest.getTotal())
+                .total(mapperHelper.formatDoubleValue(posDeviceSaleRequest.getTotal()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .build();
     }
@@ -27,7 +30,7 @@ public class PosDeviceSaleMapper {
 
         return PosDeviceSaleResponse.builder()
                 .id(posDeviceSale.getId())
-                .total(posDeviceSale.getTotal())
+                .total(mapperHelper.formatDoubleValue(posDeviceSale.getTotal()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .posDeviceName(posDeviceSale.getPosDevice().getName())
                 .build();

@@ -29,7 +29,7 @@ public class ProductHelper {
 
     public void productStockCalculatorForDailySale (Product product,Double totalAmount){
 
-        double newTotalAmount = product.getStockAmountAsLiter()+totalAmount;
+        double newTotalAmount = product.getStockAmountAsLiter()-totalAmount;
         product.setStockAmountAsLiter(newTotalAmount);
         productRepository.save(product);
     }

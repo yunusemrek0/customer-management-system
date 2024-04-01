@@ -45,7 +45,7 @@ public class CustomerService {
 
     public List<CustomerResponse> getByName(String customerName) {
 
-        return customerRepository.getByNameContains(customerName)
+        return customerRepository.findByNameIgnoreCaseContaining(customerName)
                 .stream()
                 .map(customerMapper::mapCustomerToCustomerResponse)
                 .collect(Collectors.toList());
@@ -53,14 +53,28 @@ public class CustomerService {
 
     public String updateCustomer(CustomerRequest customerRequest, Long id) {
 
-        customerHelper.isExistById(id);
+        Customer customer = customerHelper.isExistById(id);
 
         Customer customerToUpdate = customerMapper.mapCustomerRequestToCustomer(customerRequest);
         customerToUpdate.setId(id);
+        customerToUpdate.setBalance(customer.getBalance());
         customerRepository.save(customerToUpdate);
 
         return SuccessMessages.CUSTOMER_UPDATE;
 
 
+    }
+
+    public List<CustomerResponse> getAll() {
+
+        return customerRepository.findAll()
+                .stream()
+                .map(customerMapper::mapCustomerToCustomerResponse)
+                .collect(Collectors.toList());
+    }
+
+    public CustomerResponse getById(Long id) {
+
+        return customerMapper.mapCustomerToCustomerResponse(customerHelper.isExistById(id));
     }
 }

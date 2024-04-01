@@ -64,4 +64,12 @@ public class ProductPurchaseService {
                 .map(productPurchaseMapper::mapProductPurchaseToProductPurchaseResponse)
                 .collect(Collectors.toList());
     }
+
+    public List<ProductPurchaseResponse> getAll() {
+
+        return productPurchaseRepository.findAll()
+                .stream()
+                .map(productPurchaseMapper::mapProductPurchaseToProductPurchaseResponse)
+                .collect(Collectors.toList());
+    }
 }

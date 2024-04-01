@@ -3,6 +3,7 @@ package com.customermanagementsystem.payload.mapper.employee;
 import com.customermanagementsystem.entity.employee.Employee;
 import com.customermanagementsystem.payload.request.employee.EmployeeRequest;
 import com.customermanagementsystem.payload.response.employee.EmployeeResponse;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,11 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EmployeeMapper {
 
+    private final MapperHelper mapperHelper;
+
     public Employee mapEmloyeeRequestToEmployee(EmployeeRequest employeeRequest){
 
         return Employee.builder()
                 .name(employeeRequest.getName())
-                .balance(employeeRequest.getBalance())
+                .balance(mapperHelper.formatDoubleValue(employeeRequest.getBalance()))
                 .build();
     }
 
@@ -23,7 +26,7 @@ public class EmployeeMapper {
         return EmployeeResponse.builder()
                 .id(employee.getId())
                 .name(employee.getName())
-                .balance(employee.getBalance())
+                .balance(mapperHelper.formatDoubleValue(employee.getBalance()))
                 .build();
     }
 }

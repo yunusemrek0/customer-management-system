@@ -3,12 +3,15 @@ package com.customermanagementsystem.payload.mapper.customer;
 import com.customermanagementsystem.entity.customer.Customer;
 import com.customermanagementsystem.payload.request.customer.CustomerRequest;
 import com.customermanagementsystem.payload.response.customer.CustomerResponse;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 public class CustomerMapper {
+
+    private final MapperHelper mapperHelper;
 
     public Customer mapCustomerRequestToCustomer(CustomerRequest customerRequest){
 
@@ -19,7 +22,7 @@ public class CustomerMapper {
                 .taxOffice(customerRequest.getTaxOffice())
                 .address(customerRequest.getAddress())
                 .description(customerRequest.getDescription())
-                .balance(customerRequest.getBalance())
+                .balance(mapperHelper.formatDoubleValue(customerRequest.getBalance()))
                 .mobilePhone(customerRequest.getMobilePhone())
                 .build();
     }
@@ -34,7 +37,7 @@ public class CustomerMapper {
                 .taxOffice(customer.getTaxOffice())
                 .address(customer.getAddress())
                 .description(customer.getDescription())
-                .balance(customer.getBalance())
+                .balance(mapperHelper.formatDoubleValue(customer.getBalance()))
                 .mobilePhone(customer.getMobilePhone())
                 .build();
     }

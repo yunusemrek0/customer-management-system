@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/posDeviceSale")
 @RequiredArgsConstructor
@@ -31,6 +32,11 @@ public class PosDeviceSaleController {
             ){
 
         return ResponseEntity.ok(posDeviceSaleService.findByDateTime(startDateTime,endDateTime));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<PosDeviceSaleResponse>> getAll(){
+        return ResponseEntity.ok(posDeviceSaleService.getAll());
     }
 
 

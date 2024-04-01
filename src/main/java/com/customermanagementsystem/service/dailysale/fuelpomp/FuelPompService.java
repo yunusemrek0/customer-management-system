@@ -1,4 +1,4 @@
-package com.customermanagementsystem.service.dailysale;
+package com.customermanagementsystem.service.dailysale.fuelpomp;
 
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPomp;
 import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
@@ -7,6 +7,7 @@ import com.customermanagementsystem.payload.mapper.dailysale.fuelpomp.FuelPompMa
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToSave;
 import com.customermanagementsystem.payload.request.dailysale.FuelPompRequestToUpdate;
+import com.customermanagementsystem.payload.response.dailysale.fuelpomp.FuelPompResponse;
 import com.customermanagementsystem.repository.dailysale.fuelpomp.FuelPompRepository;
 import com.customermanagementsystem.repository.dailysale.fuelpomp.FuelPompStatisticRepository;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
@@ -14,6 +15,10 @@ import com.customermanagementsystem.service.helper.FuelPompHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +43,7 @@ public class FuelPompService {
         return SuccessMessages.FUEL_POMP_SAVE;
 
     }
-
+    @Transactional
     public String updateFuelPomp(FuelPompRequestToUpdate fuelPompRequest, Long id) {
 
         FuelPomp fuelPomp = fuelPompHelper.isExistById(id);
@@ -70,5 +75,21 @@ public class FuelPompService {
                 .build();
 
         fuelPompStatisticRepository.save(fuelPompStatisticToSave);
+        productHelper.productStockCalculatorForDailySale(fuelPomp.getProduct(),amount);
+    }
+
+    public List<FuelPompResponse> getAll() {
+
+        return fuelPompRepository.findAll()
+                .stream()
+                .map(fuelPompMapper::mapFuelPompToFuelPompResponse)
+                .collect(Collectors.toList());
+    }
+
+    public FuelPompResponse getById(Long id) {
+
+        return fuelPompMapper.mapFuelPompToFuelPompResponse(
+                fuelPompHelper.isExistById(id)
+        );
     }
 }

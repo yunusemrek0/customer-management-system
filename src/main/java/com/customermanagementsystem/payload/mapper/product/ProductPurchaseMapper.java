@@ -4,6 +4,7 @@ import com.customermanagementsystem.entity.product.ProductPurchase;
 import com.customermanagementsystem.payload.request.product.ProductPurchaseRequest;
 import com.customermanagementsystem.payload.response.product.ProductPurchaseResponse;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +13,13 @@ import org.springframework.stereotype.Component;
 public class ProductPurchaseMapper {
 
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
     public ProductPurchase mapProductPurchaseRequestToProductPurchase(ProductPurchaseRequest productPurchaseRequest){
 
         return ProductPurchase.builder()
-                .purchasePrice(productPurchaseRequest.getPurchasePrice())
-                .amount(productPurchaseRequest.getAmount())
-                .total(productPurchaseRequest.getPurchasePrice()*productPurchaseRequest.getAmount())
+                .purchasePrice(mapperHelper.formatDoubleValue(productPurchaseRequest.getPurchasePrice()))
+                .amount(mapperHelper.formatDoubleValue(productPurchaseRequest.getAmount()))
+                .total(mapperHelper.formatDoubleValue(productPurchaseRequest.getPurchasePrice()*productPurchaseRequest.getAmount()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .build();
     }
@@ -29,9 +31,9 @@ public class ProductPurchaseMapper {
                 .id(productPurchase.getId())
                 .productName(productPurchase.getProduct().getName())
                 .dealerName(productPurchase.getDealer().getName())
-                .purchasePrice(productPurchase.getPurchasePrice())
-                .amount(productPurchase.getAmount())
-                .total(productPurchase.getTotal())
+                .purchasePrice(mapperHelper.formatDoubleValue(productPurchase.getPurchasePrice()))
+                .amount(mapperHelper.formatDoubleValue(productPurchase.getAmount()))
+                .total(mapperHelper.formatDoubleValue(productPurchase.getTotal()))
                 .dateTime(productPurchase.getDateTime())
                 .build();
     }

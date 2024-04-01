@@ -1,6 +1,5 @@
 package com.customermanagementsystem.controller.customer;
 
-import com.customermanagementsystem.payload.request.customer.CustomerPaymentRequest;
 import com.customermanagementsystem.payload.request.customer.ForwardSaleRequest;
 import com.customermanagementsystem.payload.response.customer.ForwardSaleResponse;
 import com.customermanagementsystem.service.customer.ForwardSaleService;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/forwardSale")
 @RequiredArgsConstructor
@@ -30,6 +30,11 @@ public class ForwardSaleController {
     @GetMapping("/getByCustomer/{customerId}")
     public ResponseEntity<List<ForwardSaleResponse>> getByCustomer(@PathVariable Long customerId){
         return ResponseEntity.ok(forwardSaleService.getByCustomer(customerId));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ForwardSaleResponse>> getAll(){
+        return ResponseEntity.ok(forwardSaleService.getAll());
     }
 
 

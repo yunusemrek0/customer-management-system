@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/customerPayment")
 @RequiredArgsConstructor
@@ -27,6 +28,11 @@ public class CustomerPaymentController {
     @GetMapping("/getByCustomer/{customerId}")
     public ResponseEntity<List<CustomerPaymentResponse>> getByCustomer(@PathVariable Long customerId){
         return ResponseEntity.ok(customerPaymentService.getByCustomer(customerId));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<CustomerPaymentResponse>> getAll(){
+        return ResponseEntity.ok(customerPaymentService.getAll());
     }
 
 }

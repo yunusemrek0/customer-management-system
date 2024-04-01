@@ -29,7 +29,7 @@ public class EmployeeExpenseService {
 
         Employee employee = employeeHelper.isExistById(employeeExpenseRequest.getEmployeeId());
 
-        EmployeeExpense employeeExpenseToSave = employeeExpenseMapper.mapEmployeeExpenseRequestToEmployeeExpense(employeeExpenseRequest);
+        EmployeeExpense employeeExpenseToSave = employeeExpenseMapper.mapEmployeeExpenseToEmployeeExpenseResponse(employeeExpenseRequest);
         employeeExpenseToSave.setEmployee(employee);
 
         employeeHelper.employeeBalanceCalculator(employee,employeeExpenseToSave.getTotal());
@@ -48,10 +48,17 @@ public class EmployeeExpenseService {
 
         return employeeExpenseRepository.getByEmployeeId(employeeId)
                 .stream()
-                .map(employeeExpenseMapper::mapEmployeeExpenseRequestToEmployeeExpense)
+                .map(employeeExpenseMapper::mapEmployeeExpenseToEmployeeExpenseResponse)
                 .collect(Collectors.toList());
 
 
 
+    }
+
+    public List<EmployeeExpenseResponse> getAll() {
+        return employeeExpenseRepository.getByDailySaleIsNull()
+                .stream()
+                .map(employeeExpenseMapper::mapEmployeeExpenseToEmployeeExpenseResponse)
+                .collect(Collectors.toList());
     }
 }

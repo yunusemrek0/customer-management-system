@@ -1,7 +1,6 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
-import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.enums.TypeOfCustomerPayment;
 import com.customermanagementsystem.repository.customer.CustomerPaymentRepository;
@@ -25,7 +24,7 @@ public class CustomerPaymentHelperForDailySale {
         double total=0;
         for (CustomerPayment customerPayment:customerPayments){
             if (customerPayment.getTypeOfCustomerPayment().equals(
-                    TypeOfCustomerPayment.CREDIT_CARD)){
+                    TypeOfCustomerPayment.KREDİ_KARTI)){
                 total+= customerPayment.getTotal();
             }
         }
@@ -36,7 +35,7 @@ public class CustomerPaymentHelperForDailySale {
         double total=0;
         for (CustomerPayment customerPayment:customerPayments){
             if (!customerPayment.getTypeOfCustomerPayment().equals(
-                    TypeOfCustomerPayment.CREDIT_CARD)){
+                    TypeOfCustomerPayment.KREDİ_KARTI)){
                 total+= customerPayment.getTotal();
             }
         }

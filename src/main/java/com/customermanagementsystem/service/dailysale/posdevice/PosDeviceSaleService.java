@@ -45,4 +45,11 @@ public class PosDeviceSaleService {
                 .map(posDeviceSaleMapper::mapPosDeviceSaleToPosDeviceSaleResponse)
                 .collect(Collectors.toList());
     }
+
+    public List<PosDeviceSaleResponse> getAll() {
+        return posDeviceSaleRepository.getByDailySaleIsNull()
+                .stream()
+                .map(posDeviceSaleMapper::mapPosDeviceSaleToPosDeviceSaleResponse)
+                .collect(Collectors.toList());
+    }
 }

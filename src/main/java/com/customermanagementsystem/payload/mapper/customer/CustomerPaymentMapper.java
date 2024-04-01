@@ -4,6 +4,7 @@ import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.payload.request.customer.CustomerPaymentRequest;
 import com.customermanagementsystem.payload.response.customer.CustomerPaymentResponse;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,12 @@ import org.springframework.stereotype.Component;
 public class CustomerPaymentMapper {
 
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
     public CustomerPayment mapCustomerPaymentRequestToCustomerPayment(CustomerPaymentRequest customerPaymentRequest){
 
         return CustomerPayment.builder()
-                .total(customerPaymentRequest.getTotal())
+                .total(mapperHelper.formatDoubleValue(customerPaymentRequest.getTotal()))
                 .description(customerPaymentRequest.getDescription())
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .typeOfCustomerPayment(customerPaymentRequest.getTypeOfCustomerPayment())
@@ -29,7 +31,7 @@ public class CustomerPaymentMapper {
 
         return CustomerPaymentResponse.builder()
                 .id(customerPayment.getId())
-                .total(customerPayment.getTotal())
+                .total(mapperHelper.formatDoubleValue(customerPayment.getTotal()))
                 .customerName(customerPayment.getCustomer().getName())
                 .description(customerPayment.getDescription())
                 .dateTime(customerPayment.getDateTime())

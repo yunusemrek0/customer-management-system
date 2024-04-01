@@ -47,4 +47,12 @@ public class CustomerPaymentService {
                 .map(customerPaymentMapper :: mapCustomerPaymentToCustomerPaymentResponse)
                 .collect(Collectors.toList());
     }
+
+    public List<CustomerPaymentResponse> getAll() {
+
+        return customerPaymentRepository.getByDailySaleIsNull()
+                .stream()
+                .map(customerPaymentMapper::mapCustomerPaymentToCustomerPaymentResponse)
+                .collect(Collectors.toList());
+    }
 }

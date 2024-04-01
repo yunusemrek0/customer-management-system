@@ -41,11 +41,11 @@ public class ProductService {
     public String updateProduct(ProductRequest productRequest, Long id) {
 
         productHelper.isExistById(id);
-        Dealer dealer = dealerHelper.isExistById(productRequest.getDealerId());
+
 
         Product productToUpdate = productMapper.mapProductRequestToProduct(productRequest);
         productToUpdate.setId(id);
-        productToUpdate.setDealer(dealer);
+
 
         productRepository.save(productToUpdate);
 
@@ -58,5 +58,12 @@ public class ProductService {
                 .stream()
                 .map(productMapper::mapProductToProductResponse)
                 .collect(Collectors.toList());
+    }
+
+    public ProductResponse getById(Long id) {
+
+        return productMapper.mapProductToProductResponse(
+                productHelper.isExistById(id)
+        );
     }
 }

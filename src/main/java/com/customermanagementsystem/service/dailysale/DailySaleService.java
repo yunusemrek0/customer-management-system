@@ -9,6 +9,7 @@ import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.payload.mapper.dailysale.DailySaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
+import com.customermanagementsystem.payload.response.dailysale.DailySaleResponse;
 import com.customermanagementsystem.repository.dailysale.DailySaleRepository;
 import com.customermanagementsystem.service.helper.dailysale.*;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -93,5 +95,13 @@ public class DailySaleService {
 
             (dailySale.getTotalFuelPompSales() - dailySale.getTotalForwardSalesForCashPrice());
 
+    }
+
+    public List<DailySaleResponse> getAll() {
+
+        return dailySaleRepository.findAll()
+                .stream()
+                .map(dailySaleMapper::mapDailySaleToDailySaleResponse)
+                .collect(Collectors.toList());
     }
 }

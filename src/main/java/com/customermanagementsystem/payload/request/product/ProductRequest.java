@@ -32,6 +32,5 @@ public class ProductRequest {
     @NotNull(message = "Ürün stok kısmı boş geçilemez.")
     private Double stockAmountAsLiter;
 
-    @NotNull(message = "Bayii kısmı boş geçilemez.")
     private Long dealerId;
 }

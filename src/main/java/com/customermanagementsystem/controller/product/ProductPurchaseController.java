@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/productPurchase")
 @RequiredArgsConstructor
@@ -35,5 +36,10 @@ public class ProductPurchaseController {
     @GetMapping("/getByProduct/{productId}")
     public ResponseEntity<List<ProductPurchaseResponse>> getByProduct(@PathVariable Long productId){
         return ResponseEntity.ok(productPurchaseService.getByProduct(productId));
+    }
+
+    @GetMapping("getAll")
+    public ResponseEntity<List<ProductPurchaseResponse>> getAll(){
+        return ResponseEntity.ok(productPurchaseService.getAll());
     }
 }

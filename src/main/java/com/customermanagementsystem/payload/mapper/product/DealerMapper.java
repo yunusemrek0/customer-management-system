@@ -3,6 +3,7 @@ package com.customermanagementsystem.payload.mapper.product;
 import com.customermanagementsystem.entity.product.Dealer;
 import com.customermanagementsystem.payload.request.product.DealerRequest;
 import com.customermanagementsystem.payload.response.product.DealerResponse;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DealerMapper {
 
+    private final MapperHelper mapperHelper;
+
 
     public Dealer mapDealerRequestToDealer(DealerRequest dealerRequest){
 
         return Dealer.builder()
                 .name(dealerRequest.getName())
-                .balance(dealerRequest.getBalance())
+                .balance(mapperHelper.formatDoubleValue(dealerRequest.getBalance()))
                 .build();
     }
 
@@ -25,7 +28,7 @@ public class DealerMapper {
         return DealerResponse.builder()
                 .id(dealer.getId())
                 .name(dealer.getName())
-                .balance(dealer.getBalance())
+                .balance(mapperHelper.formatDoubleValue(dealer.getBalance()))
                 .build();
     }
 }

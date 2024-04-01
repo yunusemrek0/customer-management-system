@@ -1,5 +1,6 @@
 package com.customermanagementsystem.service.employee;
 
+import com.customermanagementsystem.entity.employee.Employee;
 import com.customermanagementsystem.payload.mapper.employee.EmployeeMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.employee.EmployeeRequest;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,4 +40,19 @@ public class EmployeeService {
     }
 
 
+    public String updateEmployee(EmployeeRequest employeeRequest, Long id) {
+
+        Employee employeeToUpdate = employeeMapper.mapEmloyeeRequestToEmployee(employeeRequest);
+        employeeToUpdate.setId(id);
+
+        employeeRepository.save(employeeToUpdate);
+        return null;
+    }
+
+    public EmployeeResponse getById(Long id) {
+
+        Optional<Employee> employee = employeeRepository.findById(id);
+
+        return employeeMapper.mapEmloyeeToEmployeeResponse(employee.get());
+    }
 }
