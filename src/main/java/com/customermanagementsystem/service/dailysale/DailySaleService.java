@@ -30,6 +30,7 @@ public class DailySaleService {
     private final EmployeeExpenseHelperForDailySale employeeExpenseHelper;
     private final PosDeviceSaleHelperForDailySale posDeviceSaleHelper;
     private final DailySaleMapper dailySaleMapper;
+    private final DailySaleHelperForDailyProfit dailyProfitHelper;
 
     @Transactional
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
@@ -37,6 +38,7 @@ public class DailySaleService {
 
         List<FuelPompStatistic> fuelPompStatistics = fuelPompStatisticHelper.getByDailySaleIsNull();
         double totalFuelPompSales = fuelPompStatisticHelper.totalFuelPompSales(fuelPompStatistics);
+        double totalFuelPompSalesAsPurchasePrice = fuelPompStatisticHelper.totalFuelPompSalesAsPurchasePrice(fuelPompStatistics);
 
         List<ForwardSale> forwardSales = forwardSaleHelper.getByDailySaleIsNull();
         double totalForwardSalesForCashPrice = forwardSaleHelper.totalSaleAsCash(forwardSales);
@@ -52,9 +54,12 @@ public class DailySaleService {
         List<PosDeviceSale> posDeviceSales = posDeviceSaleHelper.getByDailySaleIsNull();
         double totalPosDeviceSale = posDeviceSaleHelper.totalPosDeviceSale(posDeviceSales);
 
+
+
         DailySale dailySaleToSave = dailySaleMapper.mapDailySaleRequestToDailySale(dailySaleRequest);
         dailySaleToSave.setFuelPompStatistics(fuelPompStatistics);
         dailySaleToSave.setTotalFuelPompSales(totalFuelPompSales);
+        dailySaleToSave.setTotalFuelPompSalesAsPurchasePrice(totalFuelPompSalesAsPurchasePrice);
 
         dailySaleToSave.setForwardSales(forwardSales);
         dailySaleToSave.setTotalForwardSalesForCashPrice(totalForwardSalesForCashPrice);
@@ -74,6 +79,7 @@ public class DailySaleService {
 
         DailySale savedDailySale = dailySaleRepository.save(dailySaleToSave);
 
+        //dailyProfitHelper.dailyProfitCreator(savedDailySale);
         fuelPompStatisticHelper.saveDailySaleForFuelStatistic(fuelPompStatistics,savedDailySale);
         forwardSaleHelper.saveDailySaleForForwardSale(forwardSales,savedDailySale);
         paymentHelper.saveDailySaleForCustomerPayment(customerPayments,savedDailySale);

@@ -37,6 +37,8 @@ public class DailySale {
 
     private Double totalFuelPompSales;
 
+    private Double totalFuelPompSalesAsPurchasePrice;
+
     private Double totalCash;
 
     private Double bankTransferTotal;

@@ -29,5 +29,5 @@ public class DailyProfit {
 
     private Double profit;
 
-    private Double balance;
+    private Double totalIncome;
 }

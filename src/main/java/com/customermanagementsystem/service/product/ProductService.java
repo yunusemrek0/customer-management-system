@@ -40,12 +40,11 @@ public class ProductService {
 
     public String updateProduct(ProductRequest productRequest, Long id) {
 
-        productHelper.isExistById(id);
-
+        Product product = productHelper.isExistById(id);
 
         Product productToUpdate = productMapper.mapProductRequestToProduct(productRequest);
         productToUpdate.setId(id);
-
+        productToUpdate.setStockAmountAsLiter(product.getStockAmountAsLiter());
 
         productRepository.save(productToUpdate);
 

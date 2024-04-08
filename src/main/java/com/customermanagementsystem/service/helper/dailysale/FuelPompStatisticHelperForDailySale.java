@@ -37,6 +37,17 @@ public class FuelPompStatisticHelperForDailySale {
         return total;
     }
 
+    public double totalFuelPompSalesAsPurchasePrice(List<FuelPompStatistic> fuelPompStatistics){
+        double total=0;
+
+        for (FuelPompStatistic fuelPompStatistic:fuelPompStatistics){
+            total+=fuelPompStatistic.getAmountAsLiter()*
+                    fuelPompStatistic.getProduct().getPurchasePrice();
+        }
+
+        return total;
+    }
+
 
     public void saveDailySaleForFuelStatistic(List<FuelPompStatistic> fuelPompStatistics, DailySale dailySale){
         for (FuelPompStatistic fuelPompStatistic:fuelPompStatistics){

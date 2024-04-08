@@ -1,6 +1,5 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
-import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.repository.employee.EmployeeExpenseRepository;
