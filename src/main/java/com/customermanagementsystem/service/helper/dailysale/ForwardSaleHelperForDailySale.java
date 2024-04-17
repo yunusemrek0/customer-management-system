@@ -2,7 +2,6 @@ package com.customermanagementsystem.service.helper.dailysale;
 
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.entity.dailysale.DailySale;
-import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

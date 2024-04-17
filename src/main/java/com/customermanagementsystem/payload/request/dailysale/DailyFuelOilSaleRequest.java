@@ -5,14 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FuelPompRequestToUpdate {
+public class DailyFuelOilSaleRequest {
 
-    @NotNull(message = "Numerator boş bırakılamaz.")
-    private Double newNumerator;
+    
+    private Long productId;
+
+    private Double amount;
 }

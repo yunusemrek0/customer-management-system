@@ -28,4 +28,5 @@ public class DailySaleController {
     public ResponseEntity<List<DailySaleResponse>> getAll(){
         return ResponseEntity.ok(dailySaleService.getAll());
     }
+
 }

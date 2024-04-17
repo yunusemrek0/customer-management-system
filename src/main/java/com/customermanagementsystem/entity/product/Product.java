@@ -1,6 +1,7 @@
 package com.customermanagementsystem.entity.product;
 
-import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
+
+import com.customermanagementsystem.entity.dailysale.DailyFuelOilSale;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class Product {
     private Dealer dealer;
 
     @OneToMany(mappedBy = "product")
-    private List<FuelPompStatistic> fuelPompStatistics;
+    private List<DailyFuelOilSale> dailyFuelOilSales;
 
 
 }

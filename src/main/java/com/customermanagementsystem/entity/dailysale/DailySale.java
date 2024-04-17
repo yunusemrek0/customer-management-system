@@ -2,7 +2,6 @@ package com.customermanagementsystem.entity.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
-import com.customermanagementsystem.entity.dailysale.fuelpomp.FuelPompStatistic;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,11 +32,11 @@ public class DailySale {
     private Double reportZ;
 
     @OneToMany(mappedBy = "dailySale")
-    private List<FuelPompStatistic> fuelPompStatistics;
+    private List<DailyFuelOilSale> dailyFuelOilSales;
 
-    private Double totalFuelPompSales;
+    private Double totalFuelOilSales;
 
-    private Double totalFuelPompSalesAsPurchasePrice;
+    private Double totalFuelOilSalesAsPurchasePrice;
 
     private Double totalCash;
 

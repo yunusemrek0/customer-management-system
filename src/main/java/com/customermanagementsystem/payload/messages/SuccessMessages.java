@@ -46,4 +46,5 @@ public class SuccessMessages {
 
     //DailySale
     public static final String DAILY_SALE_SAVE = "Günlük satışlar sisteme başarılı bir şekilde kaydedildi.";
+    public static final String SUCCESS = "SUCCESS!" ;
 }

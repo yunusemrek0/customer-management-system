@@ -1,4 +1,4 @@
-package com.customermanagementsystem.payload.response.dailysale.fuelpomp;
+package com.customermanagementsystem.payload.response.dailysale;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -13,15 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FuelPompStatisticResponse {
+public class DailyFuelOilSaleResponse {
 
     private Long id;
 
     private LocalDateTime dateTime;
 
-    private String fuelPompName;
+    private String productName;
 
-    private Double amountAsLiter;
-
-    private Double total;
+    private Double amount;
 }

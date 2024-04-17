@@ -37,7 +37,7 @@ public class DailySaleMapper {
                 .id(dailySale.getId())
                 .dateTime(dailySale.getDateTime())
                 .reportZ(mapperHelper.formatDoubleValue(dailySale.getReportZ()))
-                .totalFuelPompSales(mapperHelper.formatDoubleValue(dailySale.getTotalFuelPompSales()))
+                .totalFuelPompSales(mapperHelper.formatDoubleValue(dailySale.getTotalFuelOilSales()))
                 .totalCash(mapperHelper.formatDoubleValue(dailySale.getTotalCash()))
                 .bankTransferTotal(mapperHelper.formatDoubleValue(dailySale.getBankTransferTotal()))
                 .totalForwardSalesForCashPrice(mapperHelper.formatDoubleValue(dailySale.getTotalForwardSalesForCashPrice()))
