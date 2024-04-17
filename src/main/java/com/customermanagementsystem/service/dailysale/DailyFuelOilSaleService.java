@@ -11,6 +11,7 @@ import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,8 @@ public class DailyFuelOilSaleService {
     private final DailyFuelOilSaleRepository dailyFuelOilSaleRepository;
     private final ProductHelper productHelper;
     private final DailyFuelOilSaleMapper dailyFuelOilSaleMapper;
+
+    @Transactional
     public String saveDailyFuelOilSale(DailyFuelOilSaleRequest dailyFuelOilSaleRequest) {
 
         Product product = productHelper.isExistById(dailyFuelOilSaleRequest.getProductId());
@@ -29,6 +32,9 @@ public class DailyFuelOilSaleService {
         dailyFuelOilSaleToSave.setProduct(product);
 
         dailyFuelOilSaleRepository.save(dailyFuelOilSaleToSave);
+        productHelper.productStockCalculatorForDailySale(product,dailyFuelOilSaleRequest.getAmount());
+
+
 
         return SuccessMessages.SUCCESS;
 
