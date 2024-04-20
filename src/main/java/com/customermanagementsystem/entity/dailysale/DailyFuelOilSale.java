@@ -28,8 +28,9 @@ public class DailyFuelOilSale {
     @OneToOne
     private Product product;
 
-    
     private Double amount;
+
+    private Double total;
 
     @ManyToOne
     private DailySale dailySale;

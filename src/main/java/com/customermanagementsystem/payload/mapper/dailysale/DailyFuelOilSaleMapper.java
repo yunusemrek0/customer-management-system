@@ -22,6 +22,7 @@ public class DailyFuelOilSaleMapper {
 
         return DailyFuelOilSale.builder()
                 .amount(mapperHelper.formatDoubleValue(saleRequest.getAmount()))
+                .total(saleRequest.getTotal())
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .build();
 
@@ -33,6 +34,7 @@ public class DailyFuelOilSaleMapper {
                 .dateTime(dailyFuelOilSale.getDateTime())
                 .productName(dailyFuelOilSale.getProduct().getName())
                 .amount(mapperHelper.formatDoubleValue(dailyFuelOilSale.getAmount()))
+                .total(mapperHelper.formatDoubleValue(dailyFuelOilSale.getTotal()))
                 .build();
     }
 }

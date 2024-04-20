@@ -22,4 +22,6 @@ public class DailyFuelOilSaleResponse {
     private String productName;
 
     private Double amount;
+
+    private Double total;
 }

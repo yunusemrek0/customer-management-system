@@ -24,7 +24,7 @@ public class DailyFuelOilSaleHelperForDailySale {
         double total=0;
 
         for (DailyFuelOilSale dailyFuelOilSale:dailyFuelOilSales){
-            total+=(dailyFuelOilSale.getProduct().getPriceForCash() * dailyFuelOilSale.getAmount());
+            total+=(dailyFuelOilSale.getTotal());
         }
 
         return total;

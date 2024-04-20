@@ -105,9 +105,11 @@ public class DailySaleService {
 
             (dailySale.getTotalCustomerPaymentsWithCash()+dailySale.getTotalCustomerPaymentsWithCreditCard())-
 
-            (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForCashPrice());
+            (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForForwardPrice());
 
     }
+
+
 
     public List<DailySaleResponse> getAll() {
 

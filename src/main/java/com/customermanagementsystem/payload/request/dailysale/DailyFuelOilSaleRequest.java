@@ -15,4 +15,6 @@ public class DailyFuelOilSaleRequest {
     private Long productId;
 
     private Double amount;
+
+    private Double total;
 }
