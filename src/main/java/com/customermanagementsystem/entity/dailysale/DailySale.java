@@ -68,6 +68,12 @@ public class DailySale {
 
     private Double totalPosDeviceSale;
 
+    @OneToMany(mappedBy = "dailySale")
+    private List<DailyExpense> dailyExpenses;
+
+    private Double totalExpenses;
+
+
     private Double balance;
 
     private Double totalIncome;

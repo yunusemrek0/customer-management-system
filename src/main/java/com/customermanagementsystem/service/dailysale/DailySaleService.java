@@ -2,6 +2,7 @@ package com.customermanagementsystem.service.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
+import com.customermanagementsystem.entity.dailysale.DailyExpense;
 import com.customermanagementsystem.entity.dailysale.DailyFuelOilSale;
 import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
@@ -31,14 +32,12 @@ public class DailySaleService {
     private final DailySaleMapper dailySaleMapper;
     private final DailyFuelOilSaleHelperForDailySale fuelOilSaleHelper;
     private final DailyProfitHelper dailyProfitHelper;
+    private final DailyExpenseHelperForDailySale dailyExpenseHelper;
 
     @Transactional
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
 
 
-        //List<FuelPompStatistic> fuelPompStatistics = fuelPompStatisticHelper.getByDailySaleIsNull();
-        //double totalFuelPompSales = fuelPompStatisticHelper.totalFuelPompSales(fuelPompStatistics);
-        //double totalFuelPompSalesAsPurchasePrice = fuelPompStatisticHelper.totalFuelPompSalesAsPurchasePrice(fuelPompStatistics);
 
         List<DailyFuelOilSale> dailyFuelOilSales = fuelOilSaleHelper.getByDailySaleIsNull();
         double totalFuelOilSale = fuelOilSaleHelper.totalFuelOilSales(dailyFuelOilSales);
@@ -58,13 +57,15 @@ public class DailySaleService {
         List<PosDeviceSale> posDeviceSales = posDeviceSaleHelper.getByDailySaleIsNull();
         double totalPosDeviceSale = posDeviceSaleHelper.totalPosDeviceSale(posDeviceSales);
 
+        List<DailyExpense> dailyExpenses = dailyExpenseHelper.getByDailySaleIsNull();
+        double totalDailyExpense = dailyExpenseHelper.totalDailyExpense(dailyExpenses);
+
 
 
         DailySale dailySaleToSave = dailySaleMapper.mapDailySaleRequestToDailySale(dailySaleRequest);
         dailySaleToSave.setDailyFuelOilSales(dailyFuelOilSales);
         dailySaleToSave.setTotalFuelOilSales(totalFuelOilSale);
         dailySaleToSave.setTotalFuelOilSalesAsPurchasePrice(totalFuelOilSaleAsPurchasePrice);
-
 
         dailySaleToSave.setForwardSales(forwardSales);
         dailySaleToSave.setTotalForwardSalesForCashPrice(totalForwardSalesForCashPrice);
@@ -80,6 +81,9 @@ public class DailySaleService {
         dailySaleToSave.setPosDeviceSales(posDeviceSales);
         dailySaleToSave.setTotalPosDeviceSale(totalPosDeviceSale);
 
+        dailySaleToSave.setDailyExpenses(dailyExpenses);
+        dailySaleToSave.setTotalExpenses(totalDailyExpense);
+
         dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
 
         DailySale savedDailySale = dailySaleRepository.save(dailySaleToSave);
@@ -90,6 +94,7 @@ public class DailySaleService {
         paymentHelper.saveDailySaleForCustomerPayment(customerPayments,savedDailySale);
         employeeExpenseHelper.saveDailySaleForEmployeeExpense(employeeExpenses,savedDailySale);
         posDeviceSaleHelper.saveDailySaleFoPosDeviceSale(posDeviceSales,savedDailySale);
+        dailyExpenseHelper.saveDailySaleForDailyExpense(dailyExpenses,savedDailySale);
         dailyProfitHelper.dailyProfitCreator(savedDailySale);
 
 
@@ -101,7 +106,7 @@ public class DailySaleService {
     private double balanceCalculator(DailySale dailySale){
 
         return
-            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense())-
+            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense()+dailySale.getTotalExpenses())-
 
             (dailySale.getTotalCustomerPaymentsWithCash()+dailySale.getTotalCustomerPaymentsWithCreditCard())-
 

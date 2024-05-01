@@ -20,6 +20,7 @@ public class EmployeeExpenseHelperForDailySale {
 
     public double totalEmployeeExpense(List<EmployeeExpense> employeeExpenses){
         double total=0;
+
         for (EmployeeExpense employeeExpense:employeeExpenses){
             total+= employeeExpense.getTotal();
         }

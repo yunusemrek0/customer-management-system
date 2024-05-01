@@ -32,4 +32,10 @@ public class CustomerHelper {
         customer.setBalance(newBalance);
         customerRepository.save(customer);
     }
+
+    public void customerBalanceCalculatorForLateCharge(Customer customer, Double total){
+        double newBalance = customer.getBalance() + total;
+        customer.setBalance(newBalance);
+        customerRepository.save(customer);
+    }
 }

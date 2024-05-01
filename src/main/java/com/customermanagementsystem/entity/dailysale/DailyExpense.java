@@ -1,7 +1,6 @@
-package com.customermanagementsystem.entity;
+package com.customermanagementsystem.entity.dailysale;
 
-import com.customermanagementsystem.entity.product.Dealer;
-import com.customermanagementsystem.entity.enums.TypeOfPayment;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +11,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "daily_expense")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Payment {
+public class DailyExpense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +25,10 @@ public class Payment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
 
-    private String description;
-
     private Double total;
 
+    private String description;
+
     @ManyToOne
-    private Dealer dealer;
-
-    @Enumerated(EnumType.STRING)
-    private TypeOfPayment typeOfPayment;
-
-
+    private DailySale dailySale;
 }
