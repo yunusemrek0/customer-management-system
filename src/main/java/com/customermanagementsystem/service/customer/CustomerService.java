@@ -1,11 +1,18 @@
 package com.customermanagementsystem.service.customer;
 
 import com.customermanagementsystem.entity.customer.Customer;
+import com.customermanagementsystem.entity.customer.CustomerPayment;
+import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
+import com.customermanagementsystem.entity.customer.forwardsale.LateCharge;
 import com.customermanagementsystem.payload.mapper.customer.CustomerMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.customer.CustomerRequest;
+import com.customermanagementsystem.payload.response.customer.CustomerDetailResponse;
 import com.customermanagementsystem.payload.response.customer.CustomerResponse;
+import com.customermanagementsystem.repository.customer.CustomerPaymentRepository;
 import com.customermanagementsystem.repository.customer.CustomerRepository;
+import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
+import com.customermanagementsystem.repository.customer.LateChargeRepository;
 import com.customermanagementsystem.service.helper.CustomerHelper;
 import com.customermanagementsystem.service.helper.PageableHelper;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +31,9 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final PageableHelper pageableHelper;
     private final CustomerHelper customerHelper;
+    private final ForwardSaleRepository forwardSaleRepository;
+    private final CustomerPaymentRepository customerPaymentRepository;
+    private final LateChargeRepository lateChargeRepository;
 
 
     public String saveCustomer(CustomerRequest customerRequest) {
@@ -76,5 +86,19 @@ public class CustomerService {
     public CustomerResponse getById(Long id) {
 
         return customerMapper.mapCustomerToCustomerResponse(customerHelper.isExistById(id));
+    }
+
+    public List<CustomerDetailResponse> getDetails(Long id) {
+
+        List<ForwardSale> forwardSales = forwardSaleRepository.getByCustomerId(id);
+        List<CustomerPayment> customerPayments = customerPaymentRepository.getByCustomerId(id);
+        List<LateCharge> lateCharges = lateChargeRepository.getByCustomerId(id);
+
+        forwardSales.sort(Comparator.comparing(ForwardSale::getDateTime));
+        customerPayments.sort(Comparator.comparing(CustomerPayment::getDateTime));
+        lateCharges.sort(Comparator.comparing(LateCharge::getDateTime));
+
+
+        return customerMapper.mapAllDetailsToCustomerDetailResponse(forwardSales,customerPayments,lateCharges);
     }
 }

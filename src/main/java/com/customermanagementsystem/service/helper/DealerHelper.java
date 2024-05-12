@@ -28,4 +28,12 @@ public class DealerHelper {
         dealerRepository.save(dealer);
 
     }
+
+    public void dealerBalanceCalculatorForPayment(Dealer dealer,Double totalPayment){
+
+        double newBalance = dealer.getBalance()-totalPayment;
+        dealer.setBalance(newBalance);
+        dealerRepository.save(dealer);
+
+    }
 }

@@ -85,10 +85,11 @@ public class DailySaleService {
         dailySaleToSave.setTotalExpenses(totalDailyExpense);
 
         dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
+        dailySaleToSave.setTotalIncome(totalIncomeCalculator(dailySaleToSave));
 
         DailySale savedDailySale = dailySaleRepository.save(dailySaleToSave);
 
-        //dailyProfitHelper.dailyProfitCreator(savedDailySale);
+
         fuelOilSaleHelper.saveDailySaleForFuelOilSales(dailyFuelOilSales,savedDailySale);
         forwardSaleHelper.saveDailySaleForForwardSale(forwardSales,savedDailySale);
         paymentHelper.saveDailySaleForCustomerPayment(customerPayments,savedDailySale);
@@ -112,6 +113,15 @@ public class DailySaleService {
 
             (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForForwardPrice());
 
+    }
+
+    private double totalIncomeCalculator(DailySale dailySale){
+        return  dailySale.getTotalExpenses()+
+                dailySale.getTotalCash()+
+                dailySale.getTotalPosDeviceSale()+
+                dailySale.getTotalEmployeeExpense()+
+                dailySale.getBankTransferTotal()+
+                dailySale.getTotalCustomerPaymentsWithCash();
     }
 
 
