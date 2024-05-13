@@ -1,5 +1,6 @@
 package com.customermanagementsystem.controller.dailysale;
 
+import com.customermanagementsystem.payload.request.dailysale.DailySaleBalanceRequest;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailySaleResponse;
 import com.customermanagementsystem.service.dailysale.DailySaleService;
@@ -27,6 +28,12 @@ public class DailySaleController {
     @GetMapping("/getAll")
     public ResponseEntity<List<DailySaleResponse>> getAll(){
         return ResponseEntity.ok(dailySaleService.getAll());
+    }
+
+
+    @PostMapping("/findBalance")
+    public Double findBalanceBeforeSave(@RequestBody DailySaleBalanceRequest dailySaleRequest){
+        return dailySaleService.findBalanceBeforeSave(dailySaleRequest);
     }
 
 }

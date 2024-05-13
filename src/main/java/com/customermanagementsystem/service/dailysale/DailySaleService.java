@@ -9,9 +9,11 @@ import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.payload.mapper.dailysale.DailySaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
+import com.customermanagementsystem.payload.request.dailysale.DailySaleBalanceRequest;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailySaleResponse;
 import com.customermanagementsystem.repository.dailysale.DailySaleRepository;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.dailysale.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,7 @@ public class DailySaleService {
     private final DailyFuelOilSaleHelperForDailySale fuelOilSaleHelper;
     private final DailyProfitHelper dailyProfitHelper;
     private final DailyExpenseHelperForDailySale dailyExpenseHelper;
+    private final MapperHelper mapperHelper;
 
     @Transactional
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
@@ -132,5 +135,33 @@ public class DailySaleService {
                 .stream()
                 .map(dailySaleMapper::mapDailySaleToDailySaleResponse)
                 .collect(Collectors.toList());
+    }
+
+    public Double findBalanceBeforeSave(DailySaleBalanceRequest dailySaleRequest) {
+
+        List<DailyFuelOilSale> dailyFuelOilSales = fuelOilSaleHelper.getByDailySaleIsNull();
+        double totalFuelOilSale = fuelOilSaleHelper.totalFuelOilSales(dailyFuelOilSales);
+
+        List<ForwardSale> forwardSales = forwardSaleHelper.getByDailySaleIsNull();
+        double totalForwardSalesForForwardPrice = forwardSaleHelper.totalSaleAsForward(forwardSales);
+
+        List<CustomerPayment> customerPayments = paymentHelper.getByDailySaleNull();
+        double totalCustomerPaymentsWithCashOrBankTransfer = paymentHelper.totalCustomerPaymentForCashOrBankTransfer(customerPayments);
+        double totalCustomerPaymentsWithCreditCard = paymentHelper.totalCustomerPaymentForCreditCard(customerPayments);
+
+        List<EmployeeExpense> employeeExpenses = employeeExpenseHelper.getByDailySaleIsNull();
+        double totalEmployeeExpense = employeeExpenseHelper.totalEmployeeExpense(employeeExpenses);
+
+        List<PosDeviceSale> posDeviceSales = posDeviceSaleHelper.getByDailySaleIsNull();
+        double totalPosDeviceSale = posDeviceSaleHelper.totalPosDeviceSale(posDeviceSales);
+
+        List<DailyExpense> dailyExpenses = dailyExpenseHelper.getByDailySaleIsNull();
+        double totalDailyExpense = dailyExpenseHelper.totalDailyExpense(dailyExpenses);
+
+        return mapperHelper.formatDoubleValue(
+                (totalPosDeviceSale+ dailySaleRequest.getTotalCash() + dailySaleRequest.getBankTransferTotal() + totalEmployeeExpense +totalDailyExpense) -
+                        (totalCustomerPaymentsWithCashOrBankTransfer + totalCustomerPaymentsWithCreditCard) -
+                        (totalFuelOilSale - totalForwardSalesForForwardPrice)
+        );
     }
 }
