@@ -6,6 +6,7 @@ import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.employee.EmployeeRequest;
 import com.customermanagementsystem.payload.response.employee.EmployeeResponse;
 import com.customermanagementsystem.repository.employee.EmployeeRepository;
+import com.customermanagementsystem.service.helper.EmployeeHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
+    private final EmployeeHelper employeeHelper;
 
     public String saveEmployee(EmployeeRequest employeeRequest) {
 
@@ -42,7 +44,9 @@ public class EmployeeService {
 
     public String updateEmployee(EmployeeRequest employeeRequest, Long id) {
 
+        Employee employee = employeeHelper.isExistById(id);
         Employee employeeToUpdate = employeeMapper.mapEmloyeeRequestToEmployee(employeeRequest);
+        employeeToUpdate.setBalance(employee.getBalance());
         employeeToUpdate.setId(id);
 
         employeeRepository.save(employeeToUpdate);

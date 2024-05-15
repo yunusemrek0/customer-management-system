@@ -47,7 +47,7 @@ public class PosDeviceSaleService {
     }
 
     public List<PosDeviceSaleResponse> getAll() {
-        return posDeviceSaleRepository.getByDailySaleIsNull()
+        return posDeviceSaleRepository.findAll()
                 .stream()
                 .map(posDeviceSaleMapper::mapPosDeviceSaleToPosDeviceSaleResponse)
                 .collect(Collectors.toList());

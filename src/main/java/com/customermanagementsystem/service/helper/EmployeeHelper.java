@@ -31,6 +31,12 @@ public class EmployeeHelper {
         employeeRepository.save(employee);
     }
 
+    public void employeeBalanceCalculatorForPayment(Employee employee,Double total){
+        double newBalance = employee.getBalance()-total;
+        employee.setBalance(newBalance);
+        employeeRepository.save(employee);
+    }
+
 
 
 }

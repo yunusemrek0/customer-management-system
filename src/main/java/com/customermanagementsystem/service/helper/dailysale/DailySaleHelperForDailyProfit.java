@@ -1,7 +1,5 @@
 package com.customermanagementsystem.service.helper.dailysale;
 
-import com.customermanagementsystem.entity.dailysale.DailyProfit;
-import com.customermanagementsystem.entity.dailysale.DailySale;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

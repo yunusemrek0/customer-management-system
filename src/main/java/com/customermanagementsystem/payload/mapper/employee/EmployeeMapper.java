@@ -17,7 +17,7 @@ public class EmployeeMapper {
 
         return Employee.builder()
                 .name(employeeRequest.getName())
-                .balance(mapperHelper.formatDoubleValue(employeeRequest.getBalance()))
+                //.balance(mapperHelper.formatDoubleValue(employeeRequest.getBalance()))
                 .build();
     }
 

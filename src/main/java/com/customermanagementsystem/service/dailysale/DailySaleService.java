@@ -7,6 +7,9 @@ import com.customermanagementsystem.entity.dailysale.DailyFuelOilSale;
 import com.customermanagementsystem.entity.dailysale.DailySale;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
+import com.customermanagementsystem.entity.employee.EmployeePayment;
+import com.customermanagementsystem.entity.fueltank.FuelTankFill;
+import com.customermanagementsystem.entity.fueltank.FuelTankSale;
 import com.customermanagementsystem.payload.mapper.dailysale.DailySaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleBalanceRequest;
@@ -36,6 +39,10 @@ public class DailySaleService {
     private final DailyProfitHelper dailyProfitHelper;
     private final DailyExpenseHelperForDailySale dailyExpenseHelper;
     private final MapperHelper mapperHelper;
+    private final EmployeePaymentHelperForDailySale employeePaymentHelper;
+    private final FuelTankFillHelperForDailySale fuelTankFillHelper;
+    private final FuelTankSaleHelperForDailySale fuelTankSaleHelper;
+
 
     @Transactional
     public String saveDailySale(DailySaleRequest dailySaleRequest) {
@@ -62,6 +69,16 @@ public class DailySaleService {
 
         List<DailyExpense> dailyExpenses = dailyExpenseHelper.getByDailySaleIsNull();
         double totalDailyExpense = dailyExpenseHelper.totalDailyExpense(dailyExpenses);
+
+        List<EmployeePayment> employeePayments = employeePaymentHelper.getByDailySaleIsNull();
+        double totalEmployeePayment = employeePaymentHelper.totalEmployeePayment(employeePayments);
+
+        List<FuelTankFill> fuelTankFills = fuelTankFillHelper.getByDailySaleIsNull();
+        double totalFuelTankFill = fuelTankFillHelper.totalFuelTankFill(fuelTankFills);
+
+        List<FuelTankSale> fuelTankSales = fuelTankSaleHelper.getByDailySaleIsNull();
+        double totalFuelTankSale = fuelTankSaleHelper.totalFuelTankSale(fuelTankSales);
+
 
 
 
@@ -90,6 +107,15 @@ public class DailySaleService {
         dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
         dailySaleToSave.setTotalIncome(totalIncomeCalculator(dailySaleToSave));
 
+        dailySaleToSave.setEmployeePayments(employeePayments);
+        dailySaleToSave.setTotalEmployeePayment(totalEmployeePayment);
+
+        dailySaleToSave.setFuelTankFills(fuelTankFills);
+        dailySaleToSave.setTotalFuelTankFill(totalFuelTankFill);
+
+        dailySaleToSave.setFuelTankSales(fuelTankSales);
+        dailySaleToSave.setTotalFuelTankSale(totalFuelTankSale);
+
         DailySale savedDailySale = dailySaleRepository.save(dailySaleToSave);
 
 
@@ -100,6 +126,9 @@ public class DailySaleService {
         posDeviceSaleHelper.saveDailySaleFoPosDeviceSale(posDeviceSales,savedDailySale);
         dailyExpenseHelper.saveDailySaleForDailyExpense(dailyExpenses,savedDailySale);
         dailyProfitHelper.dailyProfitCreator(savedDailySale);
+        employeePaymentHelper.saveDailySaleForEmployeePayment(employeePayments,savedDailySale);
+        fuelTankFillHelper.saveDailySaleForFuelTankFill(fuelTankFills,savedDailySale);
+        fuelTankSaleHelper.saveDailySaleForFuelTankSale(fuelTankSales,savedDailySale);
 
 
 
@@ -110,11 +139,11 @@ public class DailySaleService {
     private double balanceCalculator(DailySale dailySale){
 
         return
-            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense()+dailySale.getTotalExpenses())-
+            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense()+dailySale.getTotalExpenses()+ dailySale.getTotalEmployeePayment() + dailySale.getTotalFuelTankSale())-
 
             (dailySale.getTotalCustomerPaymentsWithCash()+dailySale.getTotalCustomerPaymentsWithCreditCard())-
 
-            (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForForwardPrice());
+            (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForForwardPrice() - dailySale.getTotalFuelTankFill());
 
     }
 
@@ -123,8 +152,8 @@ public class DailySaleService {
                 dailySale.getTotalCash()+
                 dailySale.getTotalPosDeviceSale()+
                 dailySale.getTotalEmployeeExpense()+
-                dailySale.getBankTransferTotal()+
-                dailySale.getTotalCustomerPaymentsWithCash();
+                dailySale.getTotalFuelTankSale()+
+                dailySale.getBankTransferTotal();
     }
 
 
@@ -158,10 +187,19 @@ public class DailySaleService {
         List<DailyExpense> dailyExpenses = dailyExpenseHelper.getByDailySaleIsNull();
         double totalDailyExpense = dailyExpenseHelper.totalDailyExpense(dailyExpenses);
 
+        List<EmployeePayment> employeePayments = employeePaymentHelper.getByDailySaleIsNull();
+        double totalEmployeePayment = employeePaymentHelper.totalEmployeePayment(employeePayments);
+
+        List<FuelTankFill> fuelTankFills = fuelTankFillHelper.getByDailySaleIsNull();
+        double totalFuelTankFill = fuelTankFillHelper.totalFuelTankFill(fuelTankFills);
+
+        List<FuelTankSale> fuelTankSales = fuelTankSaleHelper.getByDailySaleIsNull();
+        double totalFuelTankSale = fuelTankSaleHelper.totalFuelTankSale(fuelTankSales);
+
         return mapperHelper.formatDoubleValue(
-                (totalPosDeviceSale+ dailySaleRequest.getTotalCash() + dailySaleRequest.getBankTransferTotal() + totalEmployeeExpense +totalDailyExpense) -
+                (totalPosDeviceSale+ dailySaleRequest.getTotalCash() + dailySaleRequest.getBankTransferTotal() + totalEmployeeExpense +totalDailyExpense +totalEmployeePayment + totalFuelTankSale ) -
                         (totalCustomerPaymentsWithCashOrBankTransfer + totalCustomerPaymentsWithCreditCard) -
-                        (totalFuelOilSale - totalForwardSalesForForwardPrice)
+                        (totalFuelOilSale - totalForwardSalesForForwardPrice - totalFuelTankFill)
         );
     }
 }

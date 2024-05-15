@@ -38,7 +38,7 @@ public class ProductPurchaseController {
         return ResponseEntity.ok(productPurchaseService.getByProduct(productId));
     }
 
-    @GetMapping("getAll")
+    @GetMapping("/getAll")
     public ResponseEntity<List<ProductPurchaseResponse>> getAll(){
         return ResponseEntity.ok(productPurchaseService.getAll());
     }
