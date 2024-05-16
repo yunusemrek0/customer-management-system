@@ -37,7 +37,7 @@ public class EmployeePaymentService {
     }
 
     public List<EmployeePaymentResponse> getAll() {
-        return employeePaymentRepository.findAll()
+        return employeePaymentRepository.getByDailySaleIsNull()
                 .stream()
                 .map(employeePaymentMapper::mapEmployeePaymentToEmployeePaymentResponse)
                 .collect(Collectors.toList());

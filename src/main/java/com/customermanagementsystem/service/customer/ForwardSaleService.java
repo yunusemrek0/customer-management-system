@@ -59,7 +59,7 @@ public class ForwardSaleService {
 
     public List<ForwardSaleResponse> getAll() {
 
-        return forwardSaleRepository.findAll()
+        return forwardSaleRepository.getByDailySaleIsNull()
                 .stream()
                 .map(forwardSaleMapper::mapForwardSaleToForwardSaleResponse)
                 .collect(Collectors.toList());

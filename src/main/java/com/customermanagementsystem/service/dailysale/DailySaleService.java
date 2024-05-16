@@ -104,9 +104,6 @@ public class DailySaleService {
         dailySaleToSave.setDailyExpenses(dailyExpenses);
         dailySaleToSave.setTotalExpenses(totalDailyExpense);
 
-        dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
-        dailySaleToSave.setTotalIncome(totalIncomeCalculator(dailySaleToSave));
-
         dailySaleToSave.setEmployeePayments(employeePayments);
         dailySaleToSave.setTotalEmployeePayment(totalEmployeePayment);
 
@@ -115,6 +112,9 @@ public class DailySaleService {
 
         dailySaleToSave.setFuelTankSales(fuelTankSales);
         dailySaleToSave.setTotalFuelTankSale(totalFuelTankSale);
+
+        dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
+        dailySaleToSave.setTotalIncome(totalIncomeCalculator(dailySaleToSave));
 
         DailySale savedDailySale = dailySaleRepository.save(dailySaleToSave);
 

@@ -2,6 +2,7 @@ package com.customermanagementsystem.payload.mapper.dailysale;
 
 import com.customermanagementsystem.entity.dailysale.DailyProfit;
 import com.customermanagementsystem.payload.response.dailysale.DailyProfitResponse;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DailyProfitMapper {
 
+    private final MapperHelper mapperHelper;
+
     public DailyProfitResponse mapDailyProfitToDailyProfitResponse(DailyProfit dailyProfit){
         return DailyProfitResponse.builder()
-                .profit(dailyProfit.getProfit())
+                .profit(mapperHelper.formatDoubleValue(dailyProfit.getProfit()))
                 .dateTime(dailyProfit.getDateTime())
-                .totalIncome(dailyProfit.getProfit())
+                .totalIncome(mapperHelper.formatDoubleValue(dailyProfit.getTotalIncome()))
                 .build();
     }
 }

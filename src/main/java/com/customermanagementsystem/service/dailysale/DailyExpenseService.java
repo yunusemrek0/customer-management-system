@@ -27,7 +27,7 @@ public class DailyExpenseService {
     }
 
     public List<DailyExpenseResponse> getAll() {
-        return dailyExpenseRepository.findAll()
+        return dailyExpenseRepository.getByDailySaleIsNull()
                 .stream()
                 .map(dailyExpenseMapper::mapDailyExpenseToDailyExpenseResponse)
                 .collect(Collectors.toList());

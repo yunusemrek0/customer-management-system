@@ -43,7 +43,7 @@ public class DailyFuelOilSaleService {
 
     public List<DailyFuelOilSaleResponse> getAll() {
 
-        return dailyFuelOilSaleRepository.findAll()
+        return dailyFuelOilSaleRepository.getByDailySaleIsNull()
                 .stream()
                 .map(dailyFuelOilSaleMapper::mapFuelOilSaleToFuelOilSaleResponse)
                 .collect(Collectors.toList());

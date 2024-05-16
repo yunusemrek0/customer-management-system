@@ -56,7 +56,7 @@ public class EmployeeExpenseService {
     }
 
     public List<EmployeeExpenseResponse> getAll() {
-        return employeeExpenseRepository.findAll()
+        return employeeExpenseRepository.getByDailySaleIsNull()
                 .stream()
                 .map(employeeExpenseMapper::mapEmployeeExpenseToEmployeeExpenseResponse)
                 .collect(Collectors.toList());

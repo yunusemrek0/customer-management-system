@@ -50,7 +50,7 @@ public class CustomerPaymentService {
 
     public List<CustomerPaymentResponse> getAll() {
 
-        return customerPaymentRepository.findAll()
+        return customerPaymentRepository.getByDailySaleIsNull()
                 .stream()
                 .map(customerPaymentMapper::mapCustomerPaymentToCustomerPaymentResponse)
                 .collect(Collectors.toList());
