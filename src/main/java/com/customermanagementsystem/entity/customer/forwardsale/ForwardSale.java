@@ -38,6 +38,8 @@ public class ForwardSale {
 
     private Double total;
 
+    private String description;
+
     @ManyToOne
     private Customer customer;
 

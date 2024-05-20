@@ -25,5 +25,7 @@ public class ForwardSaleRequest {
     @NotNull(message = "Lütfen geçerli bir müşteri seçin.")
     private Long customerId;
 
+    private String description;
+
 
 }

@@ -62,6 +62,7 @@ public class CustomerMapper {
                     .totalFS(forwardSale.getTotal())
                     .unitPriceFS(forwardSale.getUnitPrice())
                     .productNameFS(forwardSale.getProduct().getName())
+                    .descriptionFS(forwardSale.getDescription())
                     .build());
        }
 

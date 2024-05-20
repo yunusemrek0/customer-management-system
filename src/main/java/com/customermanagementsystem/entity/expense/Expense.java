@@ -28,4 +28,6 @@ public class Expense {
     private TypeOfExpense typeOfExpense;
 
     private Double total;
+
+    private String description;
 }

@@ -28,6 +28,8 @@ public class ForwardSaleResponse {
 
     private Double total;
 
+    private String description;
+
     private String customerName;
 
 }

@@ -25,6 +25,8 @@ public class CustomerDetailResponse {
 
     private Double totalFS;
 
+    private String descriptionFS;
+
     private Double totalCP;
 
     private LocalDateTime dateTimeCP;

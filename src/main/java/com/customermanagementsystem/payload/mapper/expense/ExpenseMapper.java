@@ -19,6 +19,7 @@ public class ExpenseMapper {
         return Expense.builder()
                 .total(mapperHelper.formatDoubleValue(expenseRequest.getTotal()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
+                .description(expenseRequest.getDescription())
                 .build();
     }
 
@@ -28,6 +29,7 @@ public class ExpenseMapper {
                 .typeOfExpenseName(expense.getTypeOfExpense().getName())
                 .dateTime(expense.getDateTime())
                 .id(expense.getId())
+                .description(expense.getDescription())
                 .build();
     }
 }

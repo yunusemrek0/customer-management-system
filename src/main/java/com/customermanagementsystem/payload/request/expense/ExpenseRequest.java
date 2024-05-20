@@ -14,4 +14,6 @@ public class ExpenseRequest {
     private Long typeOfExpenseId;
 
     private Double total;
+
+    private String description;
 }

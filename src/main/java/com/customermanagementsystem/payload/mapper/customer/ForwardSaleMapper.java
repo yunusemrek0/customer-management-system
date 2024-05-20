@@ -23,6 +23,7 @@ public class ForwardSaleMapper {
                 .cashPrice(mapperHelper.formatDoubleValue(cashPrice))
                 .unitPrice(mapperHelper.formatDoubleValue(forwardSaleRequest.getUnitPrice()))
                 .amount(mapperHelper.formatDoubleValue(forwardSaleRequest.getAmount()))
+                .description(forwardSaleRequest.getDescription())
                 .total(mapperHelper.formatDoubleValue(forwardSaleRequest.getUnitPrice()*forwardSaleRequest.getAmount()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .build();
@@ -39,6 +40,7 @@ public class ForwardSaleMapper {
                 .amount(mapperHelper.formatDoubleValue(forwardSale.getAmount()))
                 .total(mapperHelper.formatDoubleValue(forwardSale.getTotal()))
                 .customerName(forwardSale.getCustomer().getName())
+                .description(forwardSale.getDescription())
                 .build();
     }
 }

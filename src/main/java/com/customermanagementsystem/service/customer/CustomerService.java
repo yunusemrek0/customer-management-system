@@ -101,4 +101,8 @@ public class CustomerService {
 
         return customerMapper.mapAllDetailsToCustomerDetailResponse(forwardSales,customerPayments,lateCharges);
     }
+
+    public Double getTotalSumOfBalance() {
+        return customerRepository.findSumOfBalance();
+    }
 }

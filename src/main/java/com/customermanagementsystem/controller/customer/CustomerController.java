@@ -66,4 +66,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getDetails(id));
     }
 
+    @GetMapping("/getSumOfBalance")
+    public ResponseEntity<Double> getTotalSumOfBalance(){
+        return ResponseEntity.ok(customerService.getTotalSumOfBalance());
+    }
+
+
+
 }

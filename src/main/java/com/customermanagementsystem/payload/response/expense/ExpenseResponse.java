@@ -21,5 +21,7 @@ public class ExpenseResponse {
 
     private String typeOfExpenseName;
 
+    private String description;
+
     private Double total;
 }
