@@ -32,8 +32,8 @@ public class DailySaleController {
 
 
     @PostMapping("/findBalance")
-    public Double findBalanceBeforeSave(@RequestBody DailySaleBalanceRequest dailySaleRequest){
-        return dailySaleService.findBalanceBeforeSave(dailySaleRequest);
+    public Double findBalanceBeforeSave(){
+        return dailySaleService.findBalanceBeforeSave();
     }
 
 }

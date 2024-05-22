@@ -1,4 +1,4 @@
-package com.customermanagementsystem.payload.request.dailysale;
+package com.customermanagementsystem.payload.request.statistic;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DailySaleRequest {
+public class DateTimeRequest {
 
-    private Double reportZ;
+    private String startDate;
 
+    private String endDate;
 }

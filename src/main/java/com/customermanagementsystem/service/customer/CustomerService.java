@@ -14,6 +14,7 @@ import com.customermanagementsystem.repository.customer.CustomerRepository;
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
 import com.customermanagementsystem.repository.customer.LateChargeRepository;
 import com.customermanagementsystem.service.helper.CustomerHelper;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.PageableHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,7 @@ public class CustomerService {
     private final ForwardSaleRepository forwardSaleRepository;
     private final CustomerPaymentRepository customerPaymentRepository;
     private final LateChargeRepository lateChargeRepository;
+    private final MapperHelper mapperHelper;
 
 
     public String saveCustomer(CustomerRequest customerRequest) {
@@ -103,6 +105,6 @@ public class CustomerService {
     }
 
     public Double getTotalSumOfBalance() {
-        return customerRepository.findSumOfBalance();
+        return mapperHelper.formatDoubleValue(customerRepository.findSumOfBalance());
     }
 }

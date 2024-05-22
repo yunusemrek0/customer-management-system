@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DailySaleRequest {
+public class BankAndCashRequest {
 
-    private Double reportZ;
-
+    private Double total;
 }

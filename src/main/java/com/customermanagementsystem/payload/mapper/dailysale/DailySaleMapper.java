@@ -24,8 +24,6 @@ public class DailySaleMapper {
     public DailySale mapDailySaleRequestToDailySale(DailySaleRequest dailySaleRequest) {
         return DailySale.builder()
                 .reportZ(mapperHelper.formatDoubleValue(dailySaleRequest.getReportZ()))
-                .totalCash(mapperHelper.formatDoubleValue(dailySaleRequest.getTotalCash()))
-                .bankTransferTotal(mapperHelper.formatDoubleValue(dailySaleRequest.getBankTransferTotal()))
                 .dateTime(dateTimeTranslator.parseLocalDateTime())
                 .build();
     }

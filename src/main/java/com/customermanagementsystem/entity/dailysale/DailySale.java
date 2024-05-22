@@ -41,7 +41,13 @@ public class DailySale {
 
     private Double totalFuelOilSalesAsPurchasePrice;
 
+    @OneToMany(mappedBy = "dailySale")
+    private List<CashDelivery> cashDeliveries;
+
     private Double totalCash;
+
+    @OneToMany(mappedBy = "dailySale")
+    private List<BankTransfer> bankTransfers;
 
     private Double bankTransferTotal;
 

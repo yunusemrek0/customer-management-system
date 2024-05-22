@@ -55,4 +55,18 @@ public class CustomerPaymentService {
                 .map(customerPaymentMapper::mapCustomerPaymentToCustomerPaymentResponse)
                 .collect(Collectors.toList());
     }
+
+    public String deleteById(Long id) {
+
+        CustomerPayment customerPaymentToDelete = customerPaymentRepository.findById(id).get();
+
+        Customer customer = customerHelper.isExistById(customerPaymentToDelete.getCustomer().getId());
+
+        customerHelper.customerBalanceCalculatorForSale(customer,customerPaymentToDelete.getTotal());
+
+        customerPaymentRepository.deleteById(id);
+
+        return null;
+
+    }
 }

@@ -2,9 +2,7 @@ package com.customermanagementsystem.service.dailysale;
 
 import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
-import com.customermanagementsystem.entity.dailysale.DailyExpense;
-import com.customermanagementsystem.entity.dailysale.DailyFuelOilSale;
-import com.customermanagementsystem.entity.dailysale.DailySale;
+import com.customermanagementsystem.entity.dailysale.*;
 import com.customermanagementsystem.entity.dailysale.posdevice.PosDeviceSale;
 import com.customermanagementsystem.entity.employee.EmployeeExpense;
 import com.customermanagementsystem.entity.employee.EmployeePayment;
@@ -14,8 +12,10 @@ import com.customermanagementsystem.payload.mapper.dailysale.DailySaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleBalanceRequest;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
+import com.customermanagementsystem.payload.request.statistic.DateTimeRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailySaleResponse;
 import com.customermanagementsystem.repository.dailysale.DailySaleRepository;
+import com.customermanagementsystem.service.helper.DateTimeTranslator;
 import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.dailysale.*;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +42,8 @@ public class DailySaleService {
     private final EmployeePaymentHelperForDailySale employeePaymentHelper;
     private final FuelTankFillHelperForDailySale fuelTankFillHelper;
     private final FuelTankSaleHelperForDailySale fuelTankSaleHelper;
+    private final DateTimeTranslator dateTimeTranslator;
+    private final CashAndBankHelperForDailySale cashAndBankHelper;
 
 
     @Transactional
@@ -79,6 +81,12 @@ public class DailySaleService {
         List<FuelTankSale> fuelTankSales = fuelTankSaleHelper.getByDailySaleIsNull();
         double totalFuelTankSale = fuelTankSaleHelper.totalFuelTankSale(fuelTankSales);
 
+        List<BankTransfer> bankTransfers = cashAndBankHelper.getByDailySaleIsNullBank();
+        double totalBankTransfer = cashAndBankHelper.totalBankTransfer(bankTransfers);
+
+        List<CashDelivery> cashDeliveries = cashAndBankHelper.getByDailySaleIsNullCash();
+        double totalCash = cashAndBankHelper.totalCashDelivery(cashDeliveries);
+
 
 
 
@@ -113,6 +121,12 @@ public class DailySaleService {
         dailySaleToSave.setFuelTankSales(fuelTankSales);
         dailySaleToSave.setTotalFuelTankSale(totalFuelTankSale);
 
+        dailySaleToSave.setCashDeliveries(cashDeliveries);
+        dailySaleToSave.setTotalCash(totalCash);
+
+        dailySaleToSave.setBankTransfers(bankTransfers);
+        dailySaleToSave.setBankTransferTotal(totalBankTransfer);
+
         dailySaleToSave.setBalance(balanceCalculator(dailySaleToSave));
         dailySaleToSave.setTotalIncome(totalIncomeCalculator(dailySaleToSave));
 
@@ -129,6 +143,8 @@ public class DailySaleService {
         employeePaymentHelper.saveDailySaleForEmployeePayment(employeePayments,savedDailySale);
         fuelTankFillHelper.saveDailySaleForFuelTankFill(fuelTankFills,savedDailySale);
         fuelTankSaleHelper.saveDailySaleForFuelTankSale(fuelTankSales,savedDailySale);
+        cashAndBankHelper.saveDailySaleForBankTransfer(bankTransfers,savedDailySale);
+        cashAndBankHelper.saveDailySaleForCashDelivery(cashDeliveries,savedDailySale);
 
 
 
@@ -166,7 +182,7 @@ public class DailySaleService {
                 .collect(Collectors.toList());
     }
 
-    public Double findBalanceBeforeSave(DailySaleBalanceRequest dailySaleRequest) {
+    public Double findBalanceBeforeSave() {
 
         List<DailyFuelOilSale> dailyFuelOilSales = fuelOilSaleHelper.getByDailySaleIsNull();
         double totalFuelOilSale = fuelOilSaleHelper.totalFuelOilSales(dailyFuelOilSales);
@@ -196,10 +212,23 @@ public class DailySaleService {
         List<FuelTankSale> fuelTankSales = fuelTankSaleHelper.getByDailySaleIsNull();
         double totalFuelTankSale = fuelTankSaleHelper.totalFuelTankSale(fuelTankSales);
 
+        List<BankTransfer> bankTransfers = cashAndBankHelper.getByDailySaleIsNullBank();
+        double totalBankTransfer = cashAndBankHelper.totalBankTransfer(bankTransfers);
+
+        List<CashDelivery> cashDeliveries = cashAndBankHelper.getByDailySaleIsNullCash();
+        double totalCash = cashAndBankHelper.totalCashDelivery(cashDeliveries);
+
         return mapperHelper.formatDoubleValue(
-                (totalPosDeviceSale+ dailySaleRequest.getTotalCash() + dailySaleRequest.getBankTransferTotal() + totalEmployeeExpense +totalDailyExpense +totalEmployeePayment + totalFuelTankSale ) -
+                (totalPosDeviceSale+ totalCash + totalBankTransfer + totalEmployeeExpense +totalDailyExpense +totalEmployeePayment + totalFuelTankSale ) -
                         (totalCustomerPaymentsWithCashOrBankTransfer + totalCustomerPaymentsWithCreditCard) -
                         (totalFuelOilSale - totalForwardSalesForForwardPrice - totalFuelTankFill)
+        );
+    }
+
+    public Double reportZTotalBetweenDate(DateTimeRequest dateTimeRequest) {
+        return dailySaleRepository.findTotalReportZBetweenDate(
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())
         );
     }
 }

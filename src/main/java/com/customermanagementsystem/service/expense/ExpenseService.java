@@ -4,8 +4,10 @@ import com.customermanagementsystem.entity.expense.Expense;
 import com.customermanagementsystem.entity.expense.TypeOfExpense;
 import com.customermanagementsystem.payload.mapper.expense.ExpenseMapper;
 import com.customermanagementsystem.payload.request.expense.ExpenseRequest;
+import com.customermanagementsystem.payload.request.statistic.DateTimeRequest;
 import com.customermanagementsystem.payload.response.expense.ExpenseResponse;
 import com.customermanagementsystem.repository.expense.ExpenseRepository;
+import com.customermanagementsystem.service.helper.DateTimeTranslator;
 import com.customermanagementsystem.service.helper.TypeOfExpenseHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final ExpenseMapper expenseMapper;
     private final TypeOfExpenseHelper typeOfExpenseHelper;
+    private final DateTimeTranslator dateTimeTranslator;
 
     @Transactional
     public String saveExpense(ExpenseRequest expenseRequest) {
@@ -40,5 +43,16 @@ public class ExpenseService {
                 .stream()
                 .map(expenseMapper::mapExpenseToResponse)
                 .collect(Collectors.toList());
+    }
+
+    public Double findTotalByDateBetween(DateTimeRequest dateTimeRequest) {
+        Double total = expenseRepository.findTotalExpenseBetweenDate(
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())
+        );
+
+        if (total == null) return 0.0;
+        return total;
+
     }
 }

@@ -3,8 +3,10 @@ package com.customermanagementsystem.service.dailysale;
 import com.customermanagementsystem.entity.dailysale.DailyExpense;
 import com.customermanagementsystem.payload.mapper.dailysale.DailyExpenseMapper;
 import com.customermanagementsystem.payload.request.dailysale.DailyExpenseRequest;
+import com.customermanagementsystem.payload.request.statistic.DateTimeRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailyExpenseResponse;
 import com.customermanagementsystem.repository.dailysale.DailyExpenseRepository;
+import com.customermanagementsystem.service.helper.DateTimeTranslator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class DailyExpenseService {
 
     private final DailyExpenseRepository dailyExpenseRepository;
     private final DailyExpenseMapper dailyExpenseMapper;
-
+    private final DateTimeTranslator dateTimeTranslator;
     public String saveDailyExpense(DailyExpenseRequest dailyExpenseRequest) {
 
         DailyExpense dailyExpenseToSave = dailyExpenseMapper.mapDailyExpenseRequestToDailyExpense(dailyExpenseRequest);
@@ -31,5 +33,15 @@ public class DailyExpenseService {
                 .stream()
                 .map(dailyExpenseMapper::mapDailyExpenseToDailyExpenseResponse)
                 .collect(Collectors.toList());
+    }
+
+    public Double findTotalByDateBetween(DateTimeRequest dateTimeRequest) {
+        Double total =  dailyExpenseRepository.findTotalExpenseBetweenDate(
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
+                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())
+        );
+
+        if (total == null) return 0.0;
+        return total;
     }
 }

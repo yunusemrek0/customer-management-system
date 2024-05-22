@@ -35,4 +35,10 @@ public class CustomerPaymentController {
         return ResponseEntity.ok(customerPaymentService.getAll());
     }
 
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCustomerPayment(@PathVariable Long id){
+        return ResponseEntity.ok(customerPaymentService.deleteById(id));
+    }
+
 }
