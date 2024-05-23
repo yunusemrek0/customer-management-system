@@ -47,4 +47,14 @@ public class CashOrBankTransferService {
                 .map(bankAndCashMapper::mapBankOrCashToResponse)
                 .collect(Collectors.toList());
     }
+
+    public String deleteBankTransferById(Long id) {
+        bankTransferRepository.deleteById(id);
+        return null;
+    }
+
+    public String deleteCashDeliveryById(Long id) {
+        cashDeliveryRepository.deleteById(id);
+        return null;
+    }
 }

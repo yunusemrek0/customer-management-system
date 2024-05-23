@@ -27,4 +27,9 @@ public class DailyFuelOilSaleController {
     public ResponseEntity<List<DailyFuelOilSaleResponse>> getAll(){
         return ResponseEntity.ok(dailyFuelOilSaleService.getAll());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFuelOilSale(@PathVariable Long id){
+        return ResponseEntity.ok(dailyFuelOilSaleService.deleteById(id));
+    }
 }

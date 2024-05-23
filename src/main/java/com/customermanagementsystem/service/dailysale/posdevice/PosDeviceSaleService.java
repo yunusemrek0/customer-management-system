@@ -74,4 +74,9 @@ public class PosDeviceSaleService {
 
         return responseList;
     }
+
+    public String deleteById(Long id) {
+        posDeviceSaleRepository.deleteById(id);
+        return null;
+    }
 }

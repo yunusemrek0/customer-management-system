@@ -33,4 +33,9 @@ public class EmployeeExpenseController {
         return ResponseEntity.ok(employeeExpenseService.getAll());
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEmployeeExpense(@PathVariable Long id){
+        return ResponseEntity.ok(employeeExpenseService.deleteById(id));
+    }
+
 }

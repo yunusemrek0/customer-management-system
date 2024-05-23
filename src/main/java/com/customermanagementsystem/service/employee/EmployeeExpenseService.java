@@ -61,4 +61,13 @@ public class EmployeeExpenseService {
                 .map(employeeExpenseMapper::mapEmployeeExpenseToEmployeeExpenseResponse)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public String deleteById(Long id) {
+        EmployeeExpense employeeExpenseToDelete = employeeExpenseRepository.findById(id).get();
+        Employee employee = employeeHelper.isExistById(employeeExpenseToDelete.getEmployee().getId());
+        employeeHelper.employeeBalanceCalculatorForPayment(employee,employeeExpenseToDelete.getTotal());
+        employeeExpenseRepository.deleteById(id);
+        return null;
+    }
 }

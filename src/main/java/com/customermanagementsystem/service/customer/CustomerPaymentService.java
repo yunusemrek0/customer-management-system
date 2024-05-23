@@ -56,6 +56,7 @@ public class CustomerPaymentService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public String deleteById(Long id) {
 
         CustomerPayment customerPaymentToDelete = customerPaymentRepository.findById(id).get();

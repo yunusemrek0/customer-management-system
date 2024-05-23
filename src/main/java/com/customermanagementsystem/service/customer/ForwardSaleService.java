@@ -96,4 +96,15 @@ public class ForwardSaleService {
         return responseList;
 
     }
+
+    @Transactional
+    public String deleteById(Long id) {
+
+        ForwardSale forwardSaleToDelete = forwardSaleRepository.findById(id).get();
+        Customer customer = customerHelper.isExistById(forwardSaleToDelete.getCustomer().getId());
+        customerHelper.customerBalanceCalculatorForPayment(customer,forwardSaleToDelete.getTotal());
+        forwardSaleRepository.deleteById(id);
+
+        return null;
+    }
 }

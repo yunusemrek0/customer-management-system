@@ -42,4 +42,13 @@ public class EmployeePaymentService {
                 .map(employeePaymentMapper::mapEmployeePaymentToEmployeePaymentResponse)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public String deleteById(Long id) {
+        EmployeePayment employeePaymentToDelete = employeePaymentRepository.findById(id).get();
+        Employee employee = employeeHelper.isExistById(employeePaymentToDelete.getEmployee().getId());
+        employeeHelper.employeeBalanceCalculator(employee,employeePaymentToDelete.getTotal());
+        employeePaymentRepository.deleteById(id);
+        return null;
+    }
 }

@@ -27,4 +27,9 @@ public class BankTransferController {
     public ResponseEntity<List<BankAndCashResponse>> getAll(){
         return ResponseEntity.ok(service.getAllBankTransfer());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteBankTransfer(@PathVariable Long id){
+        return ResponseEntity.ok(service.deleteBankTransferById(id));
+    }
 }

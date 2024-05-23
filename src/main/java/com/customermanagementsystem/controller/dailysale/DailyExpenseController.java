@@ -30,4 +30,14 @@ public class DailyExpenseController {
     public ResponseEntity<List<DailyExpenseResponse>> getAll(){
         return ResponseEntity.ok(dailyExpenseService.getAll());
     }
+
+    @GetMapping("/getAllNull")
+    public ResponseEntity<List<DailyExpenseResponse>> getAllNull(){
+        return ResponseEntity.ok(dailyExpenseService.getAllNull());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteDailyExpense(@PathVariable Long id){
+        return ResponseEntity.ok(dailyExpenseService.deleteById(id));
+    }
 }

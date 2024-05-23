@@ -39,5 +39,10 @@ public class PosDeviceSaleController {
         return ResponseEntity.ok(posDeviceSaleService.getAll());
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePosDeviceSale(@PathVariable Long id){
+        return ResponseEntity.ok(posDeviceSaleService.deleteById(id));
+    }
+
 
 }

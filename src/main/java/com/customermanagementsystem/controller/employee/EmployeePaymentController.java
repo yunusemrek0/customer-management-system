@@ -28,4 +28,9 @@ public class EmployeePaymentController {
     public ResponseEntity<List<EmployeePaymentResponse>> getAll(){
         return ResponseEntity.ok(employeePaymentService.getAll());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEmployeeExpense(@PathVariable Long id){
+        return ResponseEntity.ok(employeePaymentService.deleteById(id));
+    }
 }

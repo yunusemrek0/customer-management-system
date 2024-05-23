@@ -38,5 +38,9 @@ public class ForwardSaleController {
     }
 
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteForwardSale(@PathVariable Long id){
+        return ResponseEntity.ok(forwardSaleService.deleteById(id));
+    }
 
 }

@@ -71,4 +71,14 @@ public class DailyFuelOilSaleService {
 
         return responseList;
     }
+
+    @Transactional
+    public String deleteById(Long id) {
+        DailyFuelOilSale dailyFuelOilSaleToDelete = dailyFuelOilSaleRepository.findById(id).get();
+        Product product = productHelper.isExistById(dailyFuelOilSaleToDelete.getProduct().getId());
+        productHelper.productStockCalculatorForPurchase(product,dailyFuelOilSaleToDelete.getAmount());
+
+        dailyFuelOilSaleRepository.deleteById(id);
+        return null;
+    }
 }

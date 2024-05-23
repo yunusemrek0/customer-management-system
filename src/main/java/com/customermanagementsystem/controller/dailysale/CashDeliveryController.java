@@ -27,4 +27,9 @@ public class CashDeliveryController {
     public ResponseEntity<List<BankAndCashResponse>> getAll(){
         return ResponseEntity.ok(service.getAllCashDelivery());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCashDelivery(@PathVariable Long id){
+        return ResponseEntity.ok(service.deleteCashDeliveryById(id));
+    }
 }

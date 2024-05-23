@@ -44,4 +44,16 @@ public class DailyExpenseService {
         if (total == null) return 0.0;
         return total;
     }
+
+    public String deleteById(Long id) {
+        dailyExpenseRepository.deleteById(id);
+        return null;
+    }
+
+    public List<DailyExpenseResponse> getAllNull() {
+        return dailyExpenseRepository.findAll()
+                .stream()
+                .map(dailyExpenseMapper::mapDailyExpenseToDailyExpenseResponse)
+                .collect(Collectors.toList());
+    }
 }
