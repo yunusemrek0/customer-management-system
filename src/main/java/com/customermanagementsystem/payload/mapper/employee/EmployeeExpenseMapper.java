@@ -32,6 +32,7 @@ public class EmployeeExpenseMapper {
                 .description(employeeExpense.getDescription())
                 .total(mapperHelper.formatDoubleValue(employeeExpense.getTotal()))
                 .dateTime(employeeExpense.getDateTime())
+                .type("GİDER")
                 .build();
     }
 }

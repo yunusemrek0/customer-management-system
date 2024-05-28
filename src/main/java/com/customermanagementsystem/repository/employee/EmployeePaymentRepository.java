@@ -10,4 +10,6 @@ import java.util.List;
 public interface EmployeePaymentRepository extends JpaRepository<EmployeePayment,Long> {
 
     List<EmployeePayment> getByDailySaleIsNull();
+
+    List<EmployeePayment> getByEmployeeId(Long id);
 }

@@ -3,6 +3,7 @@ package com.customermanagementsystem.controller.employee;
 
 import com.customermanagementsystem.payload.request.employee.EmployeeRequest;
 import com.customermanagementsystem.payload.response.employee.EmployeeResponse;
+import com.customermanagementsystem.payload.response.employee.abstraction.AbstractEmployeeMovementResponse;
 import com.customermanagementsystem.service.employee.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,4 +41,11 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse> getById(@PathVariable Long id){
         return ResponseEntity.ok(employeeService.getById(id));
     }
+
+    @GetMapping("/getDetails/{id}")
+    public ResponseEntity<List<AbstractEmployeeMovementResponse>> getDetails(@PathVariable Long id){
+        return ResponseEntity.ok(employeeService.getDetails(id));
+    }
+
+
 }

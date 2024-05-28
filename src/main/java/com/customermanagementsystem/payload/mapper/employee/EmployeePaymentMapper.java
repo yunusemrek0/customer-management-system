@@ -30,6 +30,7 @@ public class EmployeePaymentMapper {
                 .employeeName(employeePayment.getEmployee().getName())
                 .dateTime(employeePayment.getDateTime())
                 .total(employeePayment.getTotal())
+                .type("ÖDEME")
                 .build();
 
     }

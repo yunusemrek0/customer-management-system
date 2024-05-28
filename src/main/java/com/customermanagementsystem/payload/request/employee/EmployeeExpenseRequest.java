@@ -1,23 +1,14 @@
 package com.customermanagementsystem.payload.request.employee;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.employee.abstraction.AbstractEmployeeMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
-
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class EmployeeExpenseRequest {
-
-    @NotNull(message = "Lütfen geçerli bir personel seçiniz.")
-    private Long employeeId;
-
-    @NotNull(message = "Tutar ksımı boş bırakılamaz.")
-    private Double total;
+@SuperBuilder
+public class EmployeeExpenseRequest extends AbstractEmployeeMovementRequest {
 
     private String description;
 }

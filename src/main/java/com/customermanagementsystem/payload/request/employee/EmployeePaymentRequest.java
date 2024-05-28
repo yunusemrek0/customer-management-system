@@ -1,17 +1,13 @@
 package com.customermanagementsystem.payload.request.employee;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.employee.abstraction.AbstractEmployeeMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class EmployeePaymentRequest {
+@SuperBuilder
+public class EmployeePaymentRequest extends AbstractEmployeeMovementRequest {
 
-    private Long employeeId;
-
-    private Double total;
 }

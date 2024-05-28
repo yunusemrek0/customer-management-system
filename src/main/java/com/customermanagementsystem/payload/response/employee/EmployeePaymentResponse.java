@@ -1,26 +1,17 @@
 package com.customermanagementsystem.payload.response.employee;
 
+import com.customermanagementsystem.payload.response.employee.abstraction.AbstractEmployeeMovementResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmployeePaymentResponse {
+public class EmployeePaymentResponse extends AbstractEmployeeMovementResponse {
 
-
-    private Long id;
-
-    private LocalDateTime dateTime;
-
-    private String employeeName;
-
-    private Double total;
 }

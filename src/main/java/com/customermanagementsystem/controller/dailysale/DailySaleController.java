@@ -1,6 +1,5 @@
 package com.customermanagementsystem.controller.dailysale;
 
-import com.customermanagementsystem.payload.request.dailysale.DailySaleBalanceRequest;
 import com.customermanagementsystem.payload.request.dailysale.DailySaleRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailySaleResponse;
 import com.customermanagementsystem.service.dailysale.DailySaleService;
