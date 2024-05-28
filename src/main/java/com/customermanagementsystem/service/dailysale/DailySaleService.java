@@ -155,9 +155,9 @@ public class DailySaleService {
     private double balanceCalculator(DailySale dailySale){
 
         return
-            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense()+dailySale.getTotalExpenses()+ dailySale.getTotalEmployeePayment() + dailySale.getTotalFuelTankSale())-
+            (dailySale.getTotalPosDeviceSale()+dailySale.getTotalCash()+dailySale.getBankTransferTotal()+dailySale.getTotalEmployeeExpense()+dailySale.getTotalExpenses() + dailySale.getTotalFuelTankSale())-
 
-            (dailySale.getTotalCustomerPaymentsWithCash()+dailySale.getTotalCustomerPaymentsWithCreditCard())-
+            (dailySale.getTotalCustomerPaymentsWithCash()+dailySale.getTotalCustomerPaymentsWithCreditCard() + dailySale.getTotalEmployeePayment())-
 
             (dailySale.getTotalFuelOilSales() - dailySale.getTotalForwardSalesForForwardPrice() - dailySale.getTotalFuelTankFill());
 
@@ -219,8 +219,8 @@ public class DailySaleService {
         double totalCash = cashAndBankHelper.totalCashDelivery(cashDeliveries);
 
         return mapperHelper.formatDoubleValue(
-                (totalPosDeviceSale+ totalCash + totalBankTransfer + totalEmployeeExpense +totalDailyExpense +totalEmployeePayment + totalFuelTankSale ) -
-                        (totalCustomerPaymentsWithCashOrBankTransfer + totalCustomerPaymentsWithCreditCard) -
+                (totalPosDeviceSale+ totalCash + totalBankTransfer + totalEmployeeExpense +totalDailyExpense  + totalFuelTankSale ) -
+                        (totalCustomerPaymentsWithCashOrBankTransfer + totalCustomerPaymentsWithCreditCard +totalEmployeePayment ) -
                         (totalFuelOilSale - totalForwardSalesForForwardPrice - totalFuelTankFill)
         );
     }
