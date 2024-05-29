@@ -41,6 +41,7 @@ public class ForwardSaleMapper {
                 .total(mapperHelper.formatDoubleValue(forwardSale.getTotal()))
                 .customerName(forwardSale.getCustomer().getName())
                 .description(forwardSale.getDescription())
+                .type("VADELİ SATIŞ")
                 .build();
     }
 }

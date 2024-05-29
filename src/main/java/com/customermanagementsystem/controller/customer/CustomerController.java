@@ -1,8 +1,8 @@
 package com.customermanagementsystem.controller.customer;
 
 import com.customermanagementsystem.payload.request.customer.CustomerRequest;
-import com.customermanagementsystem.payload.response.customer.CustomerDetailResponse;
 import com.customermanagementsystem.payload.response.customer.CustomerResponse;
+import com.customermanagementsystem.payload.response.customer.abstraction.AbstractCustomerMovementResponse;
 import com.customermanagementsystem.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -62,7 +61,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getDetails/{id}")
-    public ResponseEntity<List<CustomerDetailResponse>> getCustomerDetails(@PathVariable Long id){
+    public ResponseEntity<List<AbstractCustomerMovementResponse>> getCustomerDetails(@PathVariable Long id){
         return ResponseEntity.ok(customerService.getDetails(id));
     }
 

@@ -1,19 +1,18 @@
 package com.customermanagementsystem.payload.request.customer;
 
 import com.customermanagementsystem.entity.enums.TypeOfCustomerPayment;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.customer.abstraction.AbstractCustomerMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class CustomerPaymentRequest {
+@SuperBuilder
+public class CustomerPaymentRequest extends AbstractCustomerMovementRequest {
 
 
     @NotNull(message = "Toplam tutar boş bırakılamaz")
@@ -23,12 +22,6 @@ public class CustomerPaymentRequest {
 
     @NotNull(message = "Lütfen ödemete tipi seçiniz.")
     private TypeOfCustomerPayment typeOfCustomerPayment;
-
-
-    private String description;
-
-    @NotNull(message = "Lütfen müşteri seçiniz.")
-    private Long customerId;
 
 
 }

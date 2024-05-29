@@ -4,5 +4,6 @@ public enum TypeOfCustomerPayment {
 
     KREDİ_KARTI,
     NAKİT,
-    BANKA_TRANSFERİ
+    BANKA_TRANSFERİ,
+    AMK
 }

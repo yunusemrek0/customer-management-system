@@ -1,31 +1,27 @@
 package com.customermanagementsystem.payload.request.customer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.customer.abstraction.AbstractCustomerMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class ForwardSaleRequest {
+@SuperBuilder
+public class ForwardSaleRequest extends AbstractCustomerMovementRequest {
 
-    @NotNull(message = "Lütfen geçerli bir ürün seçin.")
+    @NotNull(message = "Lütfen geçerli bir ürün seçin.")//******
     private Long productId;
 
-    @NotNull(message = "Birim fiyat boş bırakılamaz.")
+    @NotNull(message = "Birim fiyat boş bırakılamaz.")//******
     private Double unitPrice;
 
-    @NotNull(message = "Miktar boş bırakılamaz.")
+    @NotNull(message = "Miktar boş bırakılamaz.")//******
     private Double amount;
 
-    @NotNull(message = "Lütfen geçerli bir müşteri seçin.")
-    private Long customerId;
 
-    private String description;
 
 
 }

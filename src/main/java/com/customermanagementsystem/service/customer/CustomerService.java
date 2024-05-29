@@ -5,14 +5,19 @@ import com.customermanagementsystem.entity.customer.CustomerPayment;
 import com.customermanagementsystem.entity.customer.forwardsale.ForwardSale;
 import com.customermanagementsystem.entity.customer.forwardsale.LateCharge;
 import com.customermanagementsystem.payload.mapper.customer.CustomerMapper;
+import com.customermanagementsystem.payload.mapper.customer.CustomerPaymentMapper;
+import com.customermanagementsystem.payload.mapper.customer.ForwardSaleMapper;
+import com.customermanagementsystem.payload.mapper.customer.LateChargeMapper;
+import com.customermanagementsystem.payload.mapper.fueltank.FuelTankForwardSaleMapper;
 import com.customermanagementsystem.payload.messages.SuccessMessages;
 import com.customermanagementsystem.payload.request.customer.CustomerRequest;
-import com.customermanagementsystem.payload.response.customer.CustomerDetailResponse;
 import com.customermanagementsystem.payload.response.customer.CustomerResponse;
+import com.customermanagementsystem.payload.response.customer.abstraction.AbstractCustomerMovementResponse;
 import com.customermanagementsystem.repository.customer.CustomerPaymentRepository;
 import com.customermanagementsystem.repository.customer.CustomerRepository;
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
 import com.customermanagementsystem.repository.customer.LateChargeRepository;
+import com.customermanagementsystem.repository.fueltank.FuelTankForwardSaleRepository;
 import com.customermanagementsystem.service.helper.CustomerHelper;
 import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.PageableHelper;
@@ -36,6 +41,11 @@ public class CustomerService {
     private final CustomerPaymentRepository customerPaymentRepository;
     private final LateChargeRepository lateChargeRepository;
     private final MapperHelper mapperHelper;
+    private final CustomerPaymentMapper customerPaymentMapper;
+    private final ForwardSaleMapper forwardSaleMapper;
+    private final LateChargeMapper lateChargeMapper;
+    private final FuelTankForwardSaleMapper fuelTankForwardSaleMapper;
+    private final FuelTankForwardSaleRepository fuelTankForwardSaleRepository;
 
 
     public String saveCustomer(CustomerRequest customerRequest) {
@@ -90,21 +100,46 @@ public class CustomerService {
         return customerMapper.mapCustomerToCustomerResponse(customerHelper.isExistById(id));
     }
 
-    public List<CustomerDetailResponse> getDetails(Long id) {
 
-        List<ForwardSale> forwardSales = forwardSaleRepository.getByCustomerId(id);
-        List<CustomerPayment> customerPayments = customerPaymentRepository.getByCustomerId(id);
-        List<LateCharge> lateCharges = lateChargeRepository.getByCustomerId(id);
-
-        forwardSales.sort(Comparator.comparing(ForwardSale::getDateTime));
-        customerPayments.sort(Comparator.comparing(CustomerPayment::getDateTime));
-        lateCharges.sort(Comparator.comparing(LateCharge::getDateTime));
-
-
-        return customerMapper.mapAllDetailsToCustomerDetailResponse(forwardSales,customerPayments,lateCharges);
-    }
 
     public Double getTotalSumOfBalance() {
         return mapperHelper.formatDoubleValue(customerRepository.findSumOfBalance());
+    }
+
+    public List<AbstractCustomerMovementResponse> getDetails(Long id) {
+
+        List<AbstractCustomerMovementResponse> list = new ArrayList<>();
+
+        list.addAll(
+                customerPaymentRepository.getByCustomerId(id)
+                        .stream()
+                        .map(customerPaymentMapper::mapCustomerPaymentToCustomerPaymentResponse)
+                        .toList()
+        );
+
+        list.addAll(
+                forwardSaleRepository.getByCustomerId(id)
+                        .stream()
+                        .map(forwardSaleMapper::mapForwardSaleToForwardSaleResponse)
+                        .toList()
+        );
+
+        list.addAll(
+                lateChargeRepository.getByCustomerId(id)
+                        .stream()
+                        .map(lateChargeMapper::mapLateChargeToResponse)
+                        .toList()
+        );
+
+        list.addAll(
+                fuelTankForwardSaleRepository.getByCustomerId(id)
+                        .stream()
+                        .map(fuelTankForwardSaleMapper::mapFuelTankForwardSaleToResponse)
+                        .toList()
+        );
+
+        list.sort(Comparator.comparing(AbstractCustomerMovementResponse::getDateTime).reversed());
+
+        return list;
     }
 }

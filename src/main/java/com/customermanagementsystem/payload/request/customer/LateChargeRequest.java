@@ -1,20 +1,15 @@
 package com.customermanagementsystem.payload.request.customer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.customer.abstraction.AbstractCustomerMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class LateChargeRequest {
+@SuperBuilder
+public class LateChargeRequest extends AbstractCustomerMovementRequest {
 
-    private Long customerId;
-
-    private Double total;
-
-    private String description;
+    private Double total;//*****
 
 }

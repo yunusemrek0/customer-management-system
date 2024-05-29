@@ -35,7 +35,8 @@ public class CustomerPaymentMapper {
                 .customerName(customerPayment.getCustomer().getName())
                 .description(customerPayment.getDescription())
                 .dateTime(customerPayment.getDateTime())
-                .typeOfCustomerPayment(customerPayment.getTypeOfCustomerPayment())
+                //.typeOfCustomerPayment(customerPayment.getTypeOfCustomerPayment())
+                .type("TAHSİLAT")
                 .build();
     }
 

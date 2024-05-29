@@ -35,6 +35,7 @@ public class FuelTankForwardSaleMapper {
                 .amount(fuelTankForwardSale.getAmount())
                 .unitPrice(fuelTankForwardSale.getUnitPrice())
                 .dateTime(fuelTankForwardSale.getDateTime())
+                .type("TANKER VADELİ SATIŞ")
                 .build();
     }
 }

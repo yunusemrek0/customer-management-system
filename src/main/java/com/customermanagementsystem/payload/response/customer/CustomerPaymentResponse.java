@@ -1,32 +1,19 @@
 package com.customermanagementsystem.payload.response.customer;
 
 import com.customermanagementsystem.entity.enums.TypeOfCustomerPayment;
+import com.customermanagementsystem.payload.response.customer.abstraction.AbstractCustomerMovementResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
-
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CustomerPaymentResponse {
+public class CustomerPaymentResponse extends AbstractCustomerMovementResponse {
 
-    private Long id;
-
-    private String customerName;
-
-    private LocalDateTime dateTime;
-
-    private Double total;
-
-    private TypeOfCustomerPayment typeOfCustomerPayment;
-
-    private String description;
-
-
+    private TypeOfCustomerPayment typeOfCustomerPayment;//***
 }

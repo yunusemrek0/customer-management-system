@@ -92,6 +92,7 @@ public class EmployeeService {
 
         list.sort(Comparator.comparing(AbstractEmployeeMovementResponse::getDateTime).reversed());
 
+
         return list;
     }
 }

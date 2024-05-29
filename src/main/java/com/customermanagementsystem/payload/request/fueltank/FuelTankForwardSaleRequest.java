@@ -1,20 +1,17 @@
 package com.customermanagementsystem.payload.request.fueltank;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.customermanagementsystem.payload.request.customer.abstraction.AbstractCustomerMovementRequest;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-public class FuelTankForwardSaleRequest {
+@SuperBuilder
+public class FuelTankForwardSaleRequest extends AbstractCustomerMovementRequest {
 
 
     private Long fuelTankId;
-
-    private Long customerId;
 
     private Long productId;
 
