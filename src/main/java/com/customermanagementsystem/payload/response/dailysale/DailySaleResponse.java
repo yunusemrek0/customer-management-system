@@ -1,6 +1,8 @@
 package com.customermanagementsystem.payload.response.dailysale;
 
+import com.customermanagementsystem.service.helper.LocalDateTimeToDateStringSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class DailySaleResponse {
 
     private Long id;
 
+    @JsonSerialize(using = LocalDateTimeToDateStringSerializer.class)
     private LocalDateTime dateTime;
 
     private Double reportZ;

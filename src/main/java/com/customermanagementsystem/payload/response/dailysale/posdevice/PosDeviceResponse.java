@@ -1,6 +1,8 @@
 package com.customermanagementsystem.payload.response.dailysale.posdevice;
 
+import com.customermanagementsystem.service.helper.LocalDateTimeToDateStringSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +22,6 @@ public class PosDeviceResponse {
 
     private String name;
 
+    @JsonSerialize(using = LocalDateTimeToDateStringSerializer.class)
     private LocalDateTime creationDate;
 }
