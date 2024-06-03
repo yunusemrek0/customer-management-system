@@ -5,6 +5,7 @@ import com.customermanagementsystem.payload.request.statistic.DateTimeRequest;
 import com.customermanagementsystem.payload.response.dailysale.DailyProfitResponse;
 import com.customermanagementsystem.repository.dailysale.DailyProfitRepository;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class DailyProfitService {
     private final DailyProfitRepository dailyProfitRepository;
     private final DailyProfitMapper dailyProfitMapper;
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
 
 
@@ -29,9 +31,9 @@ public class DailyProfitService {
     }
 
     public Double totalProfitBetweenDate(DateTimeRequest dateTimeRequest) {
-        return dailyProfitRepository.findTotalExpenseBetweenDate(
+        return mapperHelper.formatDoubleValue(dailyProfitRepository.findTotalExpenseBetweenDate(
                 dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
                 dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())
-        );
+        ));
     }
 }

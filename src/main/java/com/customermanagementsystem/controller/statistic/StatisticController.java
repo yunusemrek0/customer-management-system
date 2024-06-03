@@ -34,44 +34,43 @@ public class StatisticController {
     private final ProductPurchaseService productPurchaseService;
     private final DailyProfitService dailyProfitService;
 
-    @GetMapping("/fuelOilSaleBetweenDate")
+    @PostMapping("/fuelOilSaleBetweenDate")
     public ResponseEntity<List<DailyFuelOilSaleResponse>> fuelOilSaleBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(dailyFuelOilSaleService.fuelOilSaleBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/forwardSaleBetweenDate")
+    @PostMapping("/forwardSaleBetweenDate")
     public ResponseEntity<Double> forwardSaleTotalBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(forwardSaleService.forwardSaleTotalBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/reportZTotalBetweenDate")
+    @PostMapping("/reportZTotalBetweenDate")
     public ResponseEntity<Double> reportZTotalBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(dailySaleService.reportZTotalBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/posDeviceSaleBetweenDate")
+    @PostMapping("/posDeviceSaleBetweenDate")
     public ResponseEntity<List<PosDeviceSaleResponse>> posDeviceSaleBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(posDeviceSaleService.posDeviceSaleBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/totalExpenses")
+    @PostMapping("/totalExpensesBetweenDate")
     public Double totalExpenses(@RequestBody DateTimeRequest dateTimeRequest){
         return expenseService.findTotalByDateBetween(dateTimeRequest) +
                 dailyExpenseService.findTotalByDateBetween(dateTimeRequest);
-
     }
 
-    @GetMapping("/productPurchaseBetweenDate")
+    @PostMapping("/productPurchaseBetweenDate")
     public ResponseEntity<List<ProductPurchaseResponse>> productPurchaseBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(productPurchaseService.productPurchaseBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/totalProfit")
+    @PostMapping("/totalProfit")
     public ResponseEntity<Double> totalProfitBetweenDate(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(dailyProfitService.totalProfitBetweenDate(dateTimeRequest));
     }
 
-    @GetMapping("/adBlueAndVehicleMatic")
+    @PostMapping("/adBlueAndVehicleMatic")
     public ResponseEntity<List<ForwardSaleResponse>> adBlueAndVehicleMatic(@RequestBody DateTimeRequest dateTimeRequest){
         return ResponseEntity.ok(forwardSaleService.adBlueAndVehicleMatic(dateTimeRequest));
     }

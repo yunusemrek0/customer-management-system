@@ -8,11 +8,13 @@ import com.customermanagementsystem.payload.request.statistic.DateTimeRequest;
 import com.customermanagementsystem.payload.response.expense.ExpenseResponse;
 import com.customermanagementsystem.repository.expense.ExpenseRepository;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.TypeOfExpenseHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ public class ExpenseService {
     private final ExpenseMapper expenseMapper;
     private final TypeOfExpenseHelper typeOfExpenseHelper;
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
     @Transactional
     public String saveExpense(ExpenseRequest expenseRequest) {
@@ -41,6 +44,7 @@ public class ExpenseService {
     public List<ExpenseResponse> getAll() {
         return expenseRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(Expense::getDateTime).reversed()) // DateTime'a göre ters sıralama
                 .map(expenseMapper::mapExpenseToResponse)
                 .collect(Collectors.toList());
     }
@@ -52,7 +56,7 @@ public class ExpenseService {
         );
 
         if (total == null) return 0.0;
-        return total;
+        return mapperHelper.formatDoubleValue(total);
 
     }
 }

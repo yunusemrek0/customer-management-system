@@ -12,6 +12,7 @@ import com.customermanagementsystem.payload.response.product.ProductPurchaseResp
 import com.customermanagementsystem.repository.product.ProductPurchaseRepository;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
 import com.customermanagementsystem.service.helper.DealerHelper;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class ProductPurchaseService {
     private final DealerHelper dealerHelper;
     private final ProductPurchaseMapper productPurchaseMapper;
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
     @Transactional
     public String saveProductPurchase(ProductPurchaseRequest productPurchaseRequest) {
@@ -88,8 +90,8 @@ public class ProductPurchaseService {
             ProductPurchaseResponse response = new ProductPurchaseResponse();
             response.setId((Long) result[0]); // Ürün id'sini burada kullanıyoruz.
             response.setProductName((String) result[1]);
-            response.setAmount((Double) result[2]);
-            response.setTotal((Double) result[3]);
+            response.setAmount(mapperHelper.formatDoubleValue((Double) result[2]));
+            response.setTotal(mapperHelper.formatDoubleValue((Double) result[3]));
 
             responseList.add(response);
         }

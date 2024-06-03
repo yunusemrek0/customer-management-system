@@ -12,6 +12,7 @@ import com.customermanagementsystem.payload.response.dailysale.DailyFuelOilSaleR
 import com.customermanagementsystem.repository.customer.ForwardSaleRepository;
 import com.customermanagementsystem.service.helper.CustomerHelper;
 import com.customermanagementsystem.service.helper.DateTimeTranslator;
+import com.customermanagementsystem.service.helper.MapperHelper;
 import com.customermanagementsystem.service.helper.ProductHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class ForwardSaleService {
     private final CustomerHelper customerHelper;
     private final ForwardSaleMapper forwardSaleMapper;
     private final DateTimeTranslator dateTimeTranslator;
+    private final MapperHelper mapperHelper;
 
 
     @Transactional
@@ -71,9 +73,9 @@ public class ForwardSaleService {
     }
 
     public Double forwardSaleTotalBetweenDate(DateTimeRequest dateTimeRequest) {
-        return forwardSaleRepository.
+        return mapperHelper.formatDoubleValue(forwardSaleRepository.
                 findTotalForwardSaleBetweenDate(dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
-                                                dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate()));
+                        dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())));
     }
 
     public List<ForwardSaleResponse> adBlueAndVehicleMatic(DateTimeRequest dateTimeRequest) {
@@ -88,8 +90,8 @@ public class ForwardSaleService {
             ForwardSaleResponse response = new ForwardSaleResponse();
             response.setId((Long) result[0]); // Ürün id'sini burada kullanıyoruz.
             response.setProductName((String) result[1]);
-            response.setAmount((Double) result[2]);
-            response.setTotal((Double) result[3]);
+            response.setAmount(mapperHelper.formatDoubleValue((Double) result[2]));
+            response.setTotal(mapperHelper.formatDoubleValue((Double) result[3]));
             responseList.add(response);
         }
 

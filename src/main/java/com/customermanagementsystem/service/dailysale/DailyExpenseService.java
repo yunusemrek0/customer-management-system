@@ -10,6 +10,7 @@ import com.customermanagementsystem.service.helper.DateTimeTranslator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,7 @@ public class DailyExpenseService {
                 .stream()
                 .map(dailyExpenseMapper::mapDailyExpenseToDailyExpenseResponse)
                 .collect(Collectors.toList());
+
     }
 
     public Double findTotalByDateBetween(DateTimeRequest dateTimeRequest) {
@@ -53,6 +55,7 @@ public class DailyExpenseService {
     public List<DailyExpenseResponse> getAllNull() {
         return dailyExpenseRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(DailyExpense::getDateTime).reversed())
                 .map(dailyExpenseMapper::mapDailyExpenseToDailyExpenseResponse)
                 .collect(Collectors.toList());
     }

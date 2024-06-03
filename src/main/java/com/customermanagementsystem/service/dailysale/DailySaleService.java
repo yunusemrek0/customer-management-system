@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -178,8 +179,10 @@ public class DailySaleService {
 
         return dailySaleRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(DailySale::getDateTime).reversed())
                 .map(dailySaleMapper::mapDailySaleToDailySaleResponse)
                 .collect(Collectors.toList());
+        // .sorted(Comparator.comparing(Expense::getDateTime).reversed())
     }
 
     public Double findBalanceBeforeSave() {
@@ -226,9 +229,9 @@ public class DailySaleService {
     }
 
     public Double reportZTotalBetweenDate(DateTimeRequest dateTimeRequest) {
-        return dailySaleRepository.findTotalReportZBetweenDate(
+        return mapperHelper.formatDoubleValue(dailySaleRepository.findTotalReportZBetweenDate(
                 dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getStartDate()),
                 dateTimeTranslator.parseLocalDateTime(dateTimeRequest.getEndDate())
-        );
+        ));
     }
 }
